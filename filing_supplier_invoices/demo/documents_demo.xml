@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record model="document.type" id="document_001">
+            <field name="name">Type 1</field>
+        </record>
+
+        <record model="document.type" id="document_002">
+            <field name="name">Type 2</field>
+        </record>
+
+
+    </data>
+
+
+</odoo>

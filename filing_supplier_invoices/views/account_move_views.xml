@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record id="account_move_filing_number_form" model="ir.ui.view">
+            <field name="name">account.move.filing.number.view.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//group[@id='header_right_group']/div[@class='o_td_label']" position="before">
+                    <field name="filing_number" attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))], 'readonly': [('state', '!=', 'draft')]}" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="account_move_filing_number_view" model="ir.ui.view">
+            <field name="name">account.move.filing.number.view.view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="filing_status_number_to_show" decoration-bf="1" invisible="context.get('default_move_type') not in ('in_invoice', 'in_refund','in_receipt')" groups="base.group_user" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+
+
+</odoo>

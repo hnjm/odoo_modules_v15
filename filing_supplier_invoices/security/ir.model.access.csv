@@ -1,0 +1,6 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+document_type_read_all,document_type_read_all,model_document_type,,1,0,0,0
+document_type_account_manager,document_type_account_manager,model_document_type,account.group_account_manager,1,1,1,1
+document_document_read_all,document_document_read_all,model_document_document,,1,0,0,0
+document_filer,document_filer,model_document_document,group_documents_filer,1,1,1,1
+document_filerlines,document_filerlines,model_document_line,group_documents_filer,1,1,1,1

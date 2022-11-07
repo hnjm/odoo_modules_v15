@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record id="purchase_order_state_settling_form" model="ir.ui.view">
+            <field name="name">purchase.order.inherit.state.settling.view.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_order']" position="before">
+                    <field name="status_settling" readonly='1' attrs="{'invisible': [('state','not in',('purchase','done'))]}" />
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="purchase_order_state_settling_tree" model="ir.ui.view">
+            <field name="name">purchase.order.inherit.state.settling.view.tree</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_view_tree" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_status']" position="after">
+                    <field name="status_settling"
+                        invisible="context.get('quotation_only', False)"
+                        optional="show"
+                        widget="badge" decoration-success="status_settling == 'settled'" decoration-info="status_settling == 'partially_settled'"
+                    />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="purchase_order_view_filters_status_settling" model="ir.ui.view">
+            <field name="name">purchase.order.filters.status.settling</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_view_search" />
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='invoiced']" position="after">
+                    <separator />
+                    <filter name="without_filing" string="Without Filing" domain="[('status_settling', '=', 'without_filing')]" />
+                    <filter name="not_invoiced" string="Partially Settled" domain="[('status_settling', '=', 'partially_settled')]" />
+                    <filter name="invoiced" string="Settled" domain="[('status_settling', '=', 'settled')]" />
+                    <separator />
+                </xpath>
+            </field>
+        </record>
+    </data>
+
+
+</odoo>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="document_list_action" model="ir.actions.act_window">
+            <field name="name">Document</field>
+            <field name="res_model">document.document</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create the Document Filling
+                </p>
+            </field>
+        </record>
+
+        <record id="document_type_list_action" model="ir.actions.act_window">
+            <field name="name">Document Type</field>
+            <field name="res_model">document.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create the Document Type
+                </p>
+            </field>
+        </record>
+
+
+        <menuitem id="menu_documents_documents" action="document_list_action" name="Filing of documents" parent='account.menu_finance_payables' groups="group_documents_filer" sequence="-10" />
+
+        <menuitem id="menu_documents_type" name="Filing of purchases" parent="account.menu_finance_configuration" sequence="40">
+
+            <menuitem id="menu_documents_type_form" action="document_type_list_action" name="Type of document" sequence="10" />
+
+        </menuitem>
+
+
+    </data>
+
+
+</odoo>

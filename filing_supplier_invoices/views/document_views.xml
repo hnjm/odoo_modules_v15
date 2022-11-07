@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="document_document_search_view" model="ir.ui.view">
+            <field name="name">document.document.search</field>
+            <field name="model">document.document</field>
+            <field name="arch" type="xml">
+                <search string="Documents Registered">
+                    <field name="document_type_id" />
+
+                    <field name="filing_date" />
+
+                    <field name="partner_id" />
+
+                    <field name="document_number" />
+
+                </search>
+            </field>
+        </record>
+
+        <record id="document_document_form_view" model="ir.ui.view">
+            <field name="name">document.document.form</field>
+            <field name="model">document.document</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <!-- <button name="button_bill" string="Bill" class="oe_highlight"
+                            type="object"
+                            attrs="{'invisible': [('state', '!=', 'confirmed')]}" /> -->
+
+                        <button name="button_confirm" string="Confirm"
+                            type="object"
+                            attrs="{'invisible': [('state', '!=', 'draft')]}" />
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,invoiced" />
+
+                    </header>
+
+                    <sheet>
+
+                        <widget name="web_ribbon" title="Invoiced" attrs="{'invisible': [('state', '!=', 'invoiced')]}" />
+
+                        <div class="oe_title">
+                            <h1>
+                                <span attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('name', '!=', '/')]}">Draft</span>
+                            </h1>
+                            <h1 class="mt0" attrs="{'invisible':[('name', '=', '/')]}">
+                                <field name="name" readonly="1" />
+                            </h1>
+                        </div>
+                        <group>
+                            <group id="header_left_group">
+                                <field name="document_type_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+
+                                <field name="filing_date" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+
+                                <field name="partner_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+
+                                <field name="file" filename="file_name" options="{'accepted_file_extensions': 'image/*,application/pdf'}" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+
+                                <field name="file_name" invisible="1" />
+                            </group>
+                            <group id="header_right_group">
+
+                                <field name="document_number" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+
+                                <field name="document_date" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+
+                                <field name="document_amount" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+
+                            </group>
+                        </group>
+                        <group>
+                            <field name="is_relationated_purchase_order" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                        </group>
+                        <notebook attrs="{'invisible': [('is_relationated_purchase_order', '!=', True)]}">
+                            <page name="Purchases Orders" string="Purchases Orders">
+                                <!-- <field name="purchase_orders_ids" /> -->
+                                <field name="purchase_orders_ids" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                    <tree
+                                        string="Purchase Order Line"
+                                        editable="bottom"
+                                        create="false"
+                                        delete="0"
+                                    >
+                                        <field name="selected" force_save="1" />
+                                        <field name="partner_id" force_save="1" />
+                                        <field name="name" force_save="1" />
+                                        <field name="purchase_order_id" force_save="1" invisible="1" />
+                                        <field name="date_purchase_order" force_save="1" />
+                                        <field name="amount_total" force_save="1" />
+                                        <field name="currently_status_settling" force_save="1" widget="badge" decoration-success="currently_status_settling == 'settled'" decoration-info="currently_status_settling == 'currently_status_settling'" optional="show" />
+                                        <field name="status_settling" />
+
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="document_document_list_view" model="ir.ui.view">
+            <field name="name">document.document.list</field>
+            <field name="model">document.document</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="Documents Registered">
+
+                    <field name="name" string="Number" />
+
+                    <field name="document_type_id" />
+
+                    <field name="filing_date" />
+
+                    <field name="partner_id" />
+
+                    <field name="document_number" />
+
+                    <field name="document_date" />
+
+                    <field name="document_amount" />
+
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="document_document_action_form" model="ir.actions.act_window">
+            <field name="name">Documents</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">document.document</field>
+            <field name="search_view_id" ref="document_document_search_view" />
+            <field name="view_id" ref="document_document_list_view" />
+        </record>
+    </data>
+
+
+</odoo>
