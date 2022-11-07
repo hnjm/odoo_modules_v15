@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "Document Partner Sale",
-    "summary": """AAdd identification number(vat) and street of partner in tree view of sale order""",
+    "summary": """Add identification number(vat) and street of partner in tree view of sale order""",
     "version": "15.0.1.0.0",
     "author": "Jose Gonzalez / Tecnosoftware S.A.S",
     "website": "https://www.tecnosoftware.co",
