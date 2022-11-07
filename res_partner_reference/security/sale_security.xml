@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="group_references_address" model="res.groups">
+        <field name="name">Addresses by Customer in Sales Orders</field>
+        <field name="category_id" ref="base.module_category_hidden" />
+    </record>
+
+</odoo>

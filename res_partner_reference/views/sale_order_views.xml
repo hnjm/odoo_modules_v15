@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sale_order_references_partner" model="ir.ui.view">
+            <field name="name">sale.order.references.partner.view.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="partner_invoice_reference" groups="res_partner_reference.group_references_address" options='{"no_open": True, "no_create": True}' />
+                    <field name="partner_delivery_reference" groups="res_partner_reference.group_references_address" options='{"no_open": True, "no_create": True}' />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

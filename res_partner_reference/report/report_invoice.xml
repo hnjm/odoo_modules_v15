@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_invoice_document_inherit" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[@class='clearfix']" position="after">
+            <div class="row mb-4">
+                <div class="col-4">
+                    <strong t-if="o.partner_delivery_reference">Shipping Address:</strong>
+                    <div>
+                        <p class="m-0" t-field="o.partner_delivery_reference.reference_name" />
+                        <p class="m-0" t-field="o.partner_delivery_reference.street" />
+                        <p class="m-0 d-inline-block" t-field="o.partner_delivery_reference.city" />
+                        <!-- <p class="m-0 d-inline-block" t-field="o.partner_delivery_reference.city_id.name" /> -->
+                        <p class="m-0 d-inline-block" t-field="o.partner_delivery_reference.state_id.code" />
+                        <p class="m-0 d-inline-block" t-field="o.partner_delivery_reference.zip" />
+                        <p class="m-0" t-field="o.partner_delivery_reference.country_id.name" />
+
+                    </div>
+
+                </div>
+
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

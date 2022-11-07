@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_saleorder_document_inherit" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//t[@t-set='information_block']" position="replace"></xpath>
+
+        <xpath expr="//t[@t-set='address']" position="replace">
+            <div class="row mb-4">
+                <div class="col-4">
+                    <strong t-if="doc.partner_delivery_reference">Shipping Address:</strong>
+                    <div>
+                        <p class="m-0" t-field="doc.partner_delivery_reference.reference_name" />
+                        <p class="m-0" t-field="doc.partner_delivery_reference.street" />
+                        <p class="m-0 d-inline-block" t-field="doc.partner_delivery_reference.city" />
+                        <!-- <p class="m-0 d-inline-block" t-field="doc.partner_delivery_reference.city_id.name" /> -->
+                        <p class="m-0 d-inline-block" t-field="doc.partner_delivery_reference.state_id.code" />
+                        <p class="m-0 d-inline-block" t-field="doc.partner_delivery_reference.zip" />
+                        <p class="m-0" t-field="doc.partner_delivery_reference.country_id.name" />
+
+                    </div>
+
+                </div>
+                <div class="col-4">
+                    <strong t-if="doc.partner_invoice_reference">Invoicing Address:</strong>
+                    <div>
+                        <p class="m-0" t-field="doc.partner_invoice_reference.reference_name" />
+                        <p class="m-0" t-field="doc.partner_invoice_reference.street" />
+                        <p class="m-0 d-inline-block" t-field="doc.partner_invoice_reference.city" />
+                        <!-- <p class="m-0 d-inline-block" t-field="doc.partner_invoice_reference.city_id.name" /> -->
+                        <p class="m-0 d-inline-block" t-field="doc.partner_invoice_reference.state_id.code" />
+                        <p class="m-0 d-inline-block" t-field="doc.partner_invoice_reference.zip" />
+                        <p class="m-0" t-field="doc.partner_invoice_reference.country_id.name" />
+
+                    </div>
+
+                </div>
+                <div class="col-4">
+                    <strong>Client:</strong>
+                    <div t-field="doc.partner_id"
+                        t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+                    <p t-if="doc.partner_id.vat">
+                        <t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'" />
+                        :
+                        <span t-field="doc.partner_id.vat" />
+                    </p>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+
+</odoo>
