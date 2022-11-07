@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_remission_report_user" model="res.groups">
+        <field name="name">Remission Report / User</field>
+    </record>
+</odoo>

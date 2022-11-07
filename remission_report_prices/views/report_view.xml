@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_remission_form">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.internal_layout">
+                        <div class="page">
+
+                            <br />
+                            <h1 t-field="o.name" class="mt0 float-left" />
+                            <br />
+                            <div class="row mt48 mb32">
+                                <!--
+                                <div t-if="o.origin" class="col-auto" name="div_origin">
+                                    <strong>Order:</strong>
+                                    <p t-field="o.origin" />
+                                </div>
+                                
+                                <div class="col-auto" name="div_state">
+                                    <strong>Status:</strong>
+                                    <p t-field="o.state" />
+                                </div>
+                                -->
+                                <div class="col-auto" name="div_sched_date">
+                                    <strong>Scheduled Date:</strong>
+                                    <p t-field="o.scheduled_date" />
+                                </div>
+
+                                <div class="col-auto" name="div_sched_name">
+                                    <strong>Customer:</strong>
+                                    <p t-field="o.partner_id.name" />
+                                </div>
+                                <div class="col-auto" name="div_sched_vat">
+                                    <strong>VAT:</strong>
+                                    <p t-field="o.partner_id.vat" />
+                                </div>
+                                <div class="col-auto" name="div_sched_street">
+                                    <strong>Steet:</strong>
+                                    <p t-field="o.partner_id.street" />
+                                </div>
+                            </div>
+                            <div class="row mt48 mb32">
+                                <div class="col-auto" name="div_sched_city">
+                                    <strong>City:</strong>
+                                    <p t-field="o.partner_id.city" />
+                                </div>
+                                <div class="col-auto" name="div_sched_mobile">
+                                    <strong>Mobile:</strong>
+                                    <p t-field="o.partner_id.mobile" />
+                                </div>
+                                <div class="col-auto" name="div_sched_phone">
+                                    <strong>Phone:</strong>
+                                    <p t-field="o.partner_id.phone" />
+                                </div>
+                                <div class="col-auto" name="div_discount_total">
+                                    <t t-set="discount_percentage_total" t-value="0" />
+                                    <t t-foreach="o.partner_id.property_product_pricelist" t-as="pricelist">
+                                        <t t-foreach="pricelist.item_ids" t-as="discount">
+                                            <t t-set="discount_percentage_total" t-value="discount_percentage_total + discount.price_discount" />
+                                        </t>
+                                    </t>
+                                    <strong>Discount %:</strong>
+                                    <p t-esc="discount_percentage_total" />
+                                </div>
+                            </div>
+                            <br />
+                            <table class="table table-sm table-striped" t-if="o.move_line_ids and o.move_ids_without_package">
+                                <t t-set="has_barcode" t-value="any(move_line.product_id and move_line.product_id.sudo().barcode or move_line.package_id for move_line in o.move_line_ids)" />
+                                <t t-set="has_serial_number" t-value="any(move_line.lot_id or move_line.lot_name for move_line in o.move_line_ids)" groups="stock.group_production_lot" />
+                                <thead>
+                                    <tr class="text-center">
+                                        <th class="border" name="th_barcode">
+                                            <strong>Reference</strong>
+                                        </th>
+                                        <th colspan="6" class="border" name="th_product">
+                                            <strong>Product</strong>
+                                        </th>
+                                        <th class="border" name="th_quantity">
+                                            <strong>Quantity</strong>
+                                        </th>
+                                        <th class="border" name="th_price_unit">
+                                            <strong>Price unit</strong>
+                                        </th>
+                                        <th class="border" name="th_price_with_tax">
+                                            <strong>Price with tax</strong>
+                                        </th>
+                                        <th class="border" name="th_price">
+                                            <strong>Price public</strong>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="total_price" t-value="0" />
+                                    <t t-set="total_price_tax_exclude" t-value="0" />
+                                    <t t-set="total_price_with_discount" t-value="0" />
+                                    <t t-foreach="o.move_ids_without_package" t-as="move">
+                                        <!-- In case you come across duplicated lines, ask NIM or LAP -->
+                                        <t t-foreach="move.move_line_ids.sorted(key=lambda ml: ml.location_id.id)" t-as="ml">
+                                            <tr>
+                                                <td class="text-left">
+                                                    <span t-field="ml.product_id.barcode" />
+                                                </td>
+                                                <td colspan="6">
+                                                    <span t-field="ml.product_id.name" />
+                                                    <br />
+                                                    <span t-field="ml.product_id.description_picking" />
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-if="o.state != 'done'" t-field="ml.product_uom_qty" />
+                                                    <span t-if="o.state == 'done'" t-field="ml.qty_done" />
+                                                    <span t-field="ml.product_uom_id" groups="uom.group_uom" />
+
+                                                </td>
+                                                <td class="text-right">
+                                                    <t t-set="price_per_unit" t-value="ml.product_id.lst_price - ((ml.product_id.lst_price * discount_percentage_total) / 100)" />
+                                                    <span t-esc="price_per_unit" t-options='{"widget": "monetary", "display_currency": o.partner_id.currency_id}' />
+                                                </td>
+                                                <td class="text-right">
+                                                    <t t-set="price_with_tax" t-value="(price_per_unit + (price_per_unit * (ml.product_id.taxes_id.amount / 100)))" />
+                                                    <span t-esc="price_with_tax" t-options='{"widget": "monetary", "display_currency": o.partner_id.currency_id}' />
+                                                </td>
+                                                <td class="text-right">
+                                                    <t t-set="product_price" t-value="ml.product_id.lst_price + (ml.product_id.lst_price * (ml.product_id.taxes_id.amount / 100))" />
+                                                    <span t-esc="product_price" t-options='{"widget": "monetary", "display_currency": o.partner_id.currency_id}' />
+                                                </td>
+                                                <t t-set="subtotal_price" t-value="product_price * ml.qty_done" />
+                                                <t t-set="subtotal_price_exclude" t-value="price_per_unit * ml.qty_done" />
+                                                <t t-set="subtotal_with_discount" t-value="price_with_tax * ml.qty_done" />
+
+                                            </tr>
+                                            <t t-set="total_price" t-value="total_price + subtotal_price" />
+                                            <t t-set="total_price_tax_exclude" t-value="total_price_tax_exclude + subtotal_price_exclude" />
+                                            <t t-set="total_price_with_discount" t-value="total_price_with_discount + subtotal_with_discount" />
+                                        </t>
+                                    </t>
+                                </tbody>
+                            </table>
+
+                            <div class="row justify-content-end">
+
+                                <div class="col-6">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-right">
+                                                Total Price:
+                                            </th>
+                                                <th class="text-right">
+                                                    <span t-esc="total_price" t-options='{"widget": "monetary", "display_currency": o.partner_id.currency_id}' />
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-right">
+                                                Sub-Total Price:
+                                            </th>
+                                                <th class="text-right">
+                                                    <span t-esc="total_price_tax_exclude" t-options='{"widget": "monetary", "display_currency": o.partner_id.currency_id}' />
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-right">
+                                                Total Price with Discount:
+                                            </th>
+                                                <th class="text-right">
+                                                    <span t-esc="total_price_with_discount" t-options='{"widget": "monetary", "display_currency": o.partner_id.currency_id}' />
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <p t-if="o.state in ['draft', 'waiting', 'confirmed'] or no_reserved_product">
+                                <i class="fa fa-exclamation-triangle" />
+                                All products could not be reserved. Click on the "Check Availability" button to try to reserve products.
+                            </p>
+
+                            <table class="table table-sm" t-if="o.package_level_ids and o.picking_type_entire_packs and o.state in ['assigned', 'done']">
+                                <thead>
+                                    <tr>
+                                        <th name="th_package">Package</th>
+                                        <th name="th_pko_from" t-if="o.picking_type_id.code != 'incoming'" groups="stock.group_stock_multi_locations">From</th>
+                                        <th name="th_pki_from" t-if="o.picking_type_id.code != 'outgoing'" groups="stock.group_stock_multi_locations">To</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.package_level_ids.sorted(key=lambda p: p.package_id.name)" t-as="package">
+                                        <t t-set="package" t-value="package.with_context(picking_id=o.id)" />
+                                        <td name="td_pk_barcode">
+                                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=1' % ('Code128', package.package_id.name, 600, 100)" style="width:300px;height:50px; margin-left: -50px;" alt="Barcode" />
+                                            <br />
+                                        </td>
+                                        <td t-if="o.picking_type_id.code != 'incoming'" groups="stock.group_stock_multi_locations">
+                                            <span t-field="package.location_id" />
+                                        </td>
+                                        <td t-if="o.picking_type_id.code != 'outgoing'" groups="stock.group_stock_multi_locations">
+                                            <span t-field="package.location_dest_id" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <t t-set="no_reserved_product" t-value="o.move_lines.filtered(lambda x: x.product_uom_qty != x.reserved_availability and x.move_line_ids and x.state!='done')" />
+                            <p t-if="o.state in ['draft', 'waiting', 'confirmed'] or no_reserved_product">
+                                <i class="fa fa-exclamation-triangle" />
+                                All products could not be reserved. Click on the "Check Availability" button to try to reserve products.
+                            </p>
+                            <p t-field="o.note" />
+
+                            <div class="row mt-4">
+                                <div class="border-bottom col-4">
+                                    <p class="text-center mb-5">
+                                        <strong>Delivered:</strong>
+                                    </p>
+                                </div>
+                                <div class="border-bottom col-4 mx-5">
+                                    <p class="text-center mb-5">
+                                        <strong>Received:</strong>
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <report string="Remision" id="action_report_remission" model="stock.picking" report_type="qweb-pdf" name="remission_report_prices.report_remission_form" menu="False" />
+
+    </data>
+</odoo>

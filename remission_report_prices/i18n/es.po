@@ -1,0 +1,173 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* remission_report_prices
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-10-24 02:13+0000\n"
+"PO-Revision-Date: 2022-10-23 21:46-0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.2\n"
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid ""
+"<i class=\"fa fa-exclamation-triangle\"/>\n"
+"                                All products could not be reserved. Click on the \"Check Availability\" button to try to reserve products."
+msgstr ""
+"<i class=\"fa fa-exclamación-triángulo\"/>\n"
+"                                No se pudieron reservar todos los productos. Haga clic en el botón \"Comprobar disponibilidad\" para intentar reservar productos."
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid "<strong>City:</strong>"
+msgstr "<strong>Ciudad:</strong>"
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid "<strong>Customer:</strong>"
+msgstr "<strong>Cliente:</strong>"
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid "<strong>Discount %:</strong>"
+msgstr "<strong>Desc. (%): </strong>"
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid "<strong>Mobile:</strong>"
+msgstr "<strong>Celular:</strong>"
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid "<strong>Phone:</strong>"
+msgstr "<strong>Teléfono:</strong>"
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid "<strong>Price public</strong>"
+msgstr "<strong>Precio de venta</strong>"
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid "<strong>Price unit</strong>"
+msgstr "<strong>Valor Unit.</strong>"
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid "<strong>Price with tax</strong>"
+msgstr "<strong>Valor + IVA</strong>"
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid "<strong>Product</strong>"
+msgstr "<strong>Producto</strong>"
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid "<strong>Quantity</strong>"
+msgstr "<strong>Cant.</strong>"
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid "<strong>Reference</strong>"
+msgstr "<strong>Referencia</strong>"
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid "<strong>Scheduled Date:</strong>"
+msgstr "<strong>Fecha:</strong>"
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid "<strong>Steet:</strong>"
+msgstr "<strong>Dirección:</strong>"
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid "<strong>VAT:</strong>"
+msgstr "<strong>Identificación</strong>"
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid "Barcode"
+msgstr "Código de barras"
+
+#. module: remission_report_prices
+#: model:ir.model.fields,field_description:remission_report_prices.field_stock_picking__display_name
+msgid "Display Name"
+msgstr "Nombre"
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid "From"
+msgstr "Desde"
+
+#. module: remission_report_prices
+#: model:ir.model.fields,field_description:remission_report_prices.field_stock_picking__id
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: remission_report_prices
+#: model:ir.model.fields,field_description:remission_report_prices.field_stock_picking____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid "Package"
+msgstr "Paquete"
+
+#. module: remission_report_prices
+#: model:ir.model,name:remission_report_prices.model_stock_picking
+msgid "Referral with price information"
+msgstr "Remisión con información de precios"
+
+#. module: remission_report_prices
+#: model:ir.actions.report,name:remission_report_prices.action_report_remission
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.remission_report_prices_view
+msgid "Remision"
+msgstr "Remisión"
+
+#. module: remission_report_prices
+#: model:res.groups,name:remission_report_prices.group_remission_report_prices_user
+msgid "Remission Report / User"
+msgstr "Reporte de remisión con precios"
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid "Sub-Total Price:"
+msgstr "Sub-Total:"
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid "To"
+msgstr "Hasta"
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid "Total Price with Discount:"
+msgstr "Total con descuentos:"
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid "Total Price:"
+msgstr "Total precio de venta:"
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid "<strong>Delivered:</strong>"
+msgstr "<strong>Entregado:</strong>"
+
+#. module: remission_report_prices
+#: model_terms:ir.ui.view,arch_db:remission_report_prices.report_remission_form
+msgid "<strong>Received:</strong>"
+msgstr "<strong>Recibido:</strong>"
