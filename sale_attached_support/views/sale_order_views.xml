@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sale_order_requisition_attachments" model="ir.ui.view">
+            <field name="name">sale.order.inherit.attachments.view.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="definitive_attachments" widget="many2many_binary"
+                        options="{'accepted_file_extensions': 'image/*,application/pdf'}"
+                        attrs="{'readonly': [('state', 'not in', ('draft', 'sent'))]}"
+                        nolabel="1" colspan="2" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
