@@ -2,14 +2,13 @@
 # -*- coding: utf-8 -*-
 {
     "name": "Res Partner References",
-    "summary": """
+    "summary": """Add a partner references address, this references is used in sale orders created
     """,
-    "version": "14.0.1.0.0",
-    'author': "Jose Gonzalez / Tecnosoftware S.A.S",
-    'website': "https://www.tecnosoftware.co",
+    "version": "15.0.1.0.0",
+    "author": "Jose Gonzalez / Tecnosoftware S.A.S",
+    "website": "https://www.tecnosoftware.co",
     "maintainers": ["tecnosoftcol"],
     "license": "OPL-1",
-    'version': "14.0.1.0.0",
     "application": False,
     "installable": True,
     "depends": ["base", "sale", "account", "l10n_co_extra"],
