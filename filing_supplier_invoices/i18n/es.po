@@ -1,0 +1,356 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* filing_supplier_invoices
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-09 15:01+0000\n"
+"PO-Revision-Date: 2022-11-09 10:15-0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. module: filing_supplier_invoices
+#: model_terms:ir.ui.view,arch_db:filing_supplier_invoices.document_document_form_view
+msgid ""
+"<span attrs=\"{'invisible': ['|', ('state', '!=', 'draft'), ('name', '!=', "
+"'/')]}\">Draft</span>"
+msgstr ""
+"<span attrs=\"{'invisible': ['|', ('state', '!=', 'draft'), ('name', '!=', "
+"'/')]}\">Borrador</span>"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_line__amount_total
+msgid "Amount Total"
+msgstr "Monto total"
+
+#. module: filing_supplier_invoices
+#: model_terms:ir.ui.view,arch_db:filing_supplier_invoices.document_document_form_view
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields.selection,name:filing_supplier_invoices.selection__document_document__state__confirmed
+msgid "Confirmed"
+msgstr "Confirmado"
+
+#. module: filing_supplier_invoices
+#: model_terms:ir.actions.act_window,help:filing_supplier_invoices.document_list_action
+msgid "Create the Document Filling"
+msgstr "Crear el documento de radicación"
+
+#. module: filing_supplier_invoices
+#: model_terms:ir.actions.act_window,help:filing_supplier_invoices.document_type_list_action
+msgid "Create the Document Type"
+msgstr "Crear tipo de documento"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_document__create_uid
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_line__create_uid
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_template__create_uid
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_type__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_document__create_date
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_line__create_date
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_template__create_date
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_type__create_date
+msgid "Created on"
+msgstr "Creado"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_document__currency_id
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_line__currency_id
+msgid "Currency"
+msgstr "Divisa"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_line__currently_status_settling
+msgid "Currently Status"
+msgstr "Estatus Actual"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_document__filing_date
+msgid "Date Filing"
+msgstr "Fecha de radicación"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_document__display_name
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_line__display_name
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_template__display_name
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_type__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: filing_supplier_invoices
+#: model:ir.actions.act_window,name:filing_supplier_invoices.document_list_action
+#: model:ir.model,name:filing_supplier_invoices.model_document_document
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_document__file
+msgid "Document"
+msgstr "Documento"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_line__document_id
+msgid "Document Filed"
+msgstr "Documento Radicado"
+
+#. module: filing_supplier_invoices
+#: model:ir.model,name:filing_supplier_invoices.model_document_line
+msgid "Document Filed Line"
+msgstr "Línea de documento radicado"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_document__name
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_document__name_to_show
+msgid "Document Filed Reference"
+msgstr "Referencia del Documento Radicado"
+
+#. module: filing_supplier_invoices
+#: model:ir.model,name:filing_supplier_invoices.model_document_template
+msgid "Document Template"
+msgstr "Modelo de Documento"
+
+#. module: filing_supplier_invoices
+#: model:ir.actions.act_window,name:filing_supplier_invoices.document_type_list_action
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_document__document_type_id
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_template__document_type_id
+msgid "Document Type"
+msgstr "Tipo de documento"
+
+#. module: filing_supplier_invoices
+#: model:ir.actions.act_window,name:filing_supplier_invoices.document_document_action_form
+msgid "Documents"
+msgstr "Documentos"
+
+#. module: filing_supplier_invoices
+#: model:res.groups,name:filing_supplier_invoices.group_documents_filer
+msgid "Documents / Filer"
+msgstr "Archivador de Documentos"
+
+#. module: filing_supplier_invoices
+#: model_terms:ir.ui.view,arch_db:filing_supplier_invoices.document_document_list_view
+#: model_terms:ir.ui.view,arch_db:filing_supplier_invoices.document_document_search_view
+msgid "Documents Registered"
+msgstr "Documento Registrado"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields.selection,name:filing_supplier_invoices.selection__document_document__state__draft
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: filing_supplier_invoices
+#: model:ir.model,name:filing_supplier_invoices.model_account_move
+msgid "Electronic invoicing"
+msgstr "Facturación electrónica"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_document__file_name
+msgid "File Name"
+msgstr "Nombre de archivo"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_account_bank_statement_line__filing_number
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_account_bank_statement_line__filing_status_number_to_show
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_account_move__filing_number
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_account_move__filing_status_number_to_show
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_account_payment__filing_number
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_account_payment__filing_status_number_to_show
+msgid "Filing Number"
+msgstr "Número de radicación"
+
+#. module: filing_supplier_invoices
+#: model:ir.ui.menu,name:filing_supplier_invoices.menu_documents_documents
+msgid "Filing of documents"
+msgstr "Radicación de documentos"
+
+#. module: filing_supplier_invoices
+#: model:ir.ui.menu,name:filing_supplier_invoices.menu_documents_type
+msgid "Filing of purchases"
+msgstr "Radicación de compras"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_document__id
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_line__id
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_template__id
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_type__id
+msgid "ID"
+msgstr "ID"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_line__date_purchase_order
+msgid "Invoice Date"
+msgstr "Fecha de factura"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields.selection,name:filing_supplier_invoices.selection__document_document__state__invoiced
+#: model_terms:ir.ui.view,arch_db:filing_supplier_invoices.document_document_form_view
+msgid "Invoiced"
+msgstr "Facturada"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_document__is_relationated_purchase_order
+msgid "Is relationated to purchases orders"
+msgstr "Está relacionado con órdenes de compra"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_document____last_update
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_line____last_update
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_template____last_update
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_type____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_document__write_uid
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_line__write_uid
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_template__write_uid
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_type__write_uid
+msgid "Last Updated by"
+msgstr "Última modificación por"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_document__write_date
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_line__write_date
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_template__write_date
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_type__write_date
+msgid "Last Updated on"
+msgstr "Ultima actualización en"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_type__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: filing_supplier_invoices
+#: code:addons/filing_supplier_invoices/models/document.py:0
+#, python-format
+msgid "New"
+msgstr "Nuevo"
+
+#. module: filing_supplier_invoices
+#: model_terms:ir.ui.view,arch_db:filing_supplier_invoices.document_document_list_view
+msgid "Number"
+msgstr "Número"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields.selection,name:filing_supplier_invoices.selection__document_line__currently_status_settling__partially_settled
+#: model:ir.model.fields.selection,name:filing_supplier_invoices.selection__document_line__status_settling__partially_settled
+#: model:ir.model.fields.selection,name:filing_supplier_invoices.selection__purchase_order__status_settling__partially_settled
+#: model_terms:ir.ui.view,arch_db:filing_supplier_invoices.purchase_order_view_filters_status_settling
+msgid "Partially Settled"
+msgstr "Parcialmente Radicada"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_line__partner_id
+msgid "Partner"
+msgstr "Cliente"
+
+#. module: filing_supplier_invoices
+#: model:ir.model,name:filing_supplier_invoices.model_purchase_order
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_document__purchase_orders_ids
+msgid "Purchase Order"
+msgstr "Pedido de compra"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_line__purchase_order_id
+msgid "Purchase Order Id"
+msgstr "Pedido de compra ID"
+
+#. module: filing_supplier_invoices
+#: model_terms:ir.ui.view,arch_db:filing_supplier_invoices.document_document_form_view
+msgid "Purchase Order Line"
+msgstr "Linea pedido de compra"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_line__name
+msgid "Purchase Order Name"
+msgstr "Nombre de pedido de compra"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_line__status_settling
+msgid "Purchase Order Status Update"
+msgstr "Actualización del estado del pedido de compra"
+
+#. module: filing_supplier_invoices
+#: model_terms:ir.ui.view,arch_db:filing_supplier_invoices.document_document_form_view
+msgid "Purchases Orders"
+msgstr "Pedidos de Compra"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_line__selected
+msgid "Selected"
+msgstr "Seleccionada"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields.selection,name:filing_supplier_invoices.selection__document_line__currently_status_settling__settled
+#: model:ir.model.fields.selection,name:filing_supplier_invoices.selection__document_line__status_settling__settled
+#: model:ir.model.fields.selection,name:filing_supplier_invoices.selection__purchase_order__status_settling__settled
+#: model_terms:ir.ui.view,arch_db:filing_supplier_invoices.purchase_order_view_filters_status_settling
+msgid "Settled"
+msgstr "Radicada"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_document__state
+msgid "Status"
+msgstr "Estado"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_purchase_order__status_settling
+msgid "Status of Settling"
+msgstr "Estado de radicación"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_document__document_amount
+msgid "Supplier invoice amount"
+msgstr "Valor de factura del proveedor"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_document__document_date
+msgid "Supplier invoice date"
+msgstr "Fecha de factura del proveedor"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_document__document_number
+msgid "Supplier invoice number"
+msgstr "Número de factura del proveedor"
+
+#. module: filing_supplier_invoices
+#: model:ir.model,name:filing_supplier_invoices.model_document_type
+msgid "Type of Document"
+msgstr "Tipo de documento"
+
+#. module: filing_supplier_invoices
+#: model:ir.ui.menu,name:filing_supplier_invoices.menu_documents_type_form
+msgid "Type of document"
+msgstr "Tipo de documento"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields,field_description:filing_supplier_invoices.field_document_document__partner_id
+msgid "Vendor"
+msgstr "Vendedor"
+
+#. module: filing_supplier_invoices
+#: model:ir.model.fields.selection,name:filing_supplier_invoices.selection__document_line__currently_status_settling__without_filing
+#: model:ir.model.fields.selection,name:filing_supplier_invoices.selection__purchase_order__status_settling__without_filing
+#: model_terms:ir.ui.view,arch_db:filing_supplier_invoices.purchase_order_view_filters_status_settling
+msgid "Without Filing"
+msgstr "Sin Radicación"
+
+#. module: filing_supplier_invoices
+#: code:addons/filing_supplier_invoices/models/document.py:0
+#, python-format
+msgid ""
+"You must add purchases orders relationateds or deselect 'Is relationated to "
+"purchases orders'"
+msgstr ""
+"Debes agregar pedidos de compra relacionadas o deseleccionar 'Está "
+"relacionado con órdenes de compra'"
