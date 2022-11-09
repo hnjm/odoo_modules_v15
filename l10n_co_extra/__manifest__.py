@@ -22,7 +22,7 @@
     'website': 'https://github.com/birkot',
     'category': 'Localization',
     'version': '14.0.1.0.0',
-    'depends': ['base','base_vat', 'base_address_city', 'contacts','l10n_latam_base','product','uom'],
+    'depends': ['base', 'base_vat', 'base_address_city', 'contacts', 'l10n_latam_base', 'product', 'uom', 'l10n_co_edi_jorels'],
     "post_init_hook": "post_init_hook",
     "external_dependencies": {"python": ["pandas"]},
     'data': [
