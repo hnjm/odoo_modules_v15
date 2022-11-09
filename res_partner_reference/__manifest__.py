@@ -11,7 +11,7 @@
     "license": "OPL-1",
     "application": False,
     "installable": True,
-    "depends": ["base", "sale", "account", "l10n_co_extra"],
+    "depends": ["base", "sale", "account", "l10n_co_extra", "neighborhood_partner_address"],
     "data": [
         "security/ir.model.access.csv",
         "security/sale_security.xml",

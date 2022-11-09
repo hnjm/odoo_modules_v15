@@ -56,6 +56,14 @@ class ResPartnerReference(models.Model):
 
     title = fields.Many2one('res.partner.title')
 
+    localidad_id = fields.Many2one('res.city.barrios', string='Barrio')
+    barrio = fields.Char('Barrio')
+
+    @api.onchange('localidad_id')
+    def _onchange_localidad_id(self):
+        if self.localidad_id:
+            self.barrio = self.localidad_id.name
+
     @api.onchange("city_id")
     def _onchange_city_id(self):
         if self.zip_id and self.city_id != self.zip_id.city_id:
