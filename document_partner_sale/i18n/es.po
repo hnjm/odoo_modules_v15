@@ -1,0 +1,38 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* document_partner_sale
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-09 19:06+0000\n"
+"PO-Revision-Date: 2022-11-09 14:08-0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. module: document_partner_sale
+#: model:ir.model.fields,help:document_partner_sale.field_sale_order__vat_to_show
+msgid "Identification Number for selected type"
+msgstr "Número de identificación para el tipo seleccionado"
+
+#. module: document_partner_sale
+#: model:ir.model,name:document_partner_sale.model_sale_order
+msgid "Sales Order"
+msgstr "Pedido de venta"
+
+#. module: document_partner_sale
+#: model:ir.model.fields,field_description:document_partner_sale.field_sale_order__street_to_show
+msgid "Street"
+msgstr "Dirección"
+
+#. module: document_partner_sale
+#: model:ir.model.fields,field_description:document_partner_sale.field_sale_order__vat_to_show
+msgid "VAT"
+msgstr "Número de documento"
