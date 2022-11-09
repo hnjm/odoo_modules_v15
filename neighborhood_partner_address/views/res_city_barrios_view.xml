@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="barrio_zip_form">
+            <field name="name">res.city.barrios.form</field>
+            <field name="model">res.city.barrios</field>
+            <field name="arch" type="xml">
+                <form string="Barrios">
+                    <group>
+                        <field name="name"/>
+                        <field name="city_id"/>
+                        <field name="zona_id"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="barrio_zip_tree">
+            <field name="name">res.city.barrios.tree</field>
+            <field name="model">res.city.barrios</field>
+            <field name="arch" type="xml">
+                <tree string="Barrios" editable="top">
+                    <field name="name"/>
+                    <field name="city_id"/>
+                    <field name="zona_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <act_window  id="action_barrios_codigopostal" name="Barrios" res_model="res.city.barrios" view_mode="tree,form"/>
+
+        <record id="action_res_barrios_cp" model="ir.actions.act_window">
+            <field name="name">Barrios</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.city.barrios</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids"
+                   eval="[(5,0,0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('barrio_zip_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('barrio_zip_form')})]"/>
+        </record>
+
+        <menuitem  id="locations_menu_barrios" name="Barrios" parent="contacts.menu_localisation" sequence="4" action="action_res_barrios_cp" />
+    
+    </data>
+
+</odoo>
