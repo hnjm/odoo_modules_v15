@@ -8,7 +8,8 @@ class City(models.Model):
 
     codigo_municipio = fields.Char("Código municipio")
 
-    zip_ids = fields.One2many("res.city.zip", "city_id", string="Códigos postales")
+    zip_ids = fields.One2many(
+        "res.city.zip", "city_id", string="Códigos postales")
 
     zipcode = fields.Char(string='C.P.', compute='_zipcode')
 
@@ -19,3 +20,18 @@ class City(models.Model):
                 rec.zipcode = str(rec.codigo_municipio).zfill(5)
             else:
                 rec.zipcode = ''
+
+    @api.model
+    def name_search(self, name, args=None, operator='ilike', limit=100):
+        if not args:
+            args = []
+
+        if name:
+            state = self.search([
+                '|',
+                ('name', operator, name),
+                ('codigo_municipio', operator, name)] + args, limit=limit)
+        else:
+            state = self.search([], limit=100)
+
+        return state.name_get()

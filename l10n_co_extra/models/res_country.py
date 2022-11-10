@@ -16,11 +16,11 @@ class ResCountry(models.Model):
         for record in self:
             name = u'%s [%s]' % (record.name or '', record.code or '')
             res.append((record.id, name))
-    
+
         return res
 
     @api.model
-    def name_search(self, name, args = None, operator = 'ilike', limit = 100):
+    def name_search(self, name, args=None, operator='ilike', limit=100):
         if not args:
             args = []
 
@@ -30,7 +30,7 @@ class ResCountry(models.Model):
                 '|',
                 ('code_dian', operator, name),
                 ('name', operator, name),
-                ('code', operator, name)] + args, limit = limit)
+                ('code', operator, name)] + args, limit=limit)
         else:
             state = self.search([], limit=100)
 
