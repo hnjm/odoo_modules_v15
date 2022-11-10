@@ -11,7 +11,7 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["sale_stock", "contacts"],
+    "depends": ["sale_stock", "contacts", "l10n_co_extra"],
     "data": [
         "security/ir.model.access.csv",
         "views/partner_delivery_zone_view.xml",

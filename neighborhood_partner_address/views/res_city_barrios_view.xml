@@ -7,9 +7,9 @@
             <field name="arch" type="xml">
                 <form string="Barrios">
                     <group>
-                        <field name="name"/>
-                        <field name="city_id"/>
-                        <field name="zona_id"/>
+                        <field name="name" />
+                        <field name="city_id" />
+                        <field name="zona_id" domain="[('city_id', '=', city_id)]" />
                     </group>
                 </form>
             </field>
@@ -20,14 +20,14 @@
             <field name="model">res.city.barrios</field>
             <field name="arch" type="xml">
                 <tree string="Barrios" editable="top">
-                    <field name="name"/>
-                    <field name="city_id"/>
-                    <field name="zona_id"/>
+                    <field name="name" />
+                    <field name="city_id" />
+                    <field name="zona_id" domain="[('city_id', '=', city_id)]" />
                 </tree>
             </field>
         </record>
 
-        <act_window  id="action_barrios_codigopostal" name="Barrios" res_model="res.city.barrios" view_mode="tree,form"/>
+        <act_window id="action_barrios_codigopostal" name="Barrios" res_model="res.city.barrios" view_mode="tree,form" />
 
         <record id="action_res_barrios_cp" model="ir.actions.act_window">
             <field name="name">Barrios</field>
@@ -35,13 +35,13 @@
             <field name="res_model">res.city.barrios</field>
             <field name="view_mode">tree,form</field>
             <field name="view_ids"
-                   eval="[(5,0,0),
+                eval="[(5,0,0),
                           (0, 0, {'view_mode': 'tree', 'view_id': ref('barrio_zip_tree')}),
-                          (0, 0, {'view_mode': 'form', 'view_id': ref('barrio_zip_form')})]"/>
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('barrio_zip_form')})]" />
         </record>
 
-        <menuitem  id="locations_menu_barrios" name="Barrios" parent="contacts.menu_localisation" sequence="4" action="action_res_barrios_cp" />
-    
+        <menuitem id="locations_menu_barrios" name="Barrios" parent="contacts.menu_localisation" sequence="4" action="action_res_barrios_cp" />
+
     </data>
 
 </odoo>

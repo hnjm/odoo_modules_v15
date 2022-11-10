@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright 2018 Tecnativa - Sergio Teruel
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
@@ -11,6 +11,7 @@
                     <group>
                         <field name="code" />
                         <field name="name" />
+                        <field name="city_id" />
                     </group>
                 </sheet>
             </form>
@@ -23,6 +24,8 @@
             <tree>
                 <field name="code" />
                 <field name="name" />
+                <field name="city_id" />
+
             </tree>
         </field>
     </record>
@@ -33,6 +36,7 @@
             <search string="Delivery Zone">
                 <field name="code" />
                 <field name="name" />
+                <field name="city_id" />
             </search>
         </field>
     </record>

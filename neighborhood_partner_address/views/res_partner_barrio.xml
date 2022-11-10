@@ -72,8 +72,8 @@
     <field name="inherit_id" ref="base.view_partner_form" />
     <field name="arch" type="xml">
       <xpath expr="//field[@name='country_id']" position="after">
-        <field name="localidad_id" placeholder="Barrio ..." domain="[('city_id', '=', city_id)]" options="{&quot;no_open&quot;: True}" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}" class="o_address_street" />
-        <!--  -->
+        <field name="localidad_id" placeholder="Barrio ..." domain="[('city_id', '=', city_id)]" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}" class="o_address_street" />
+        <!-- options="{&quot;no_open&quot;: True}"  -->
         <!-- <field name="barrio" placeholder="Barrio ..." class="o_address_street" /> -->
       </xpath>
 
