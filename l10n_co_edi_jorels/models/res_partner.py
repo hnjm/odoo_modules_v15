@@ -36,7 +36,8 @@ class ResPartner(models.Model):
     merchant_registration = fields.Char(string="Merchant registration")
     municipality_id = fields.Many2one(comodel_name='l10n_co_edi_jorels.municipalities', string="Municipality",
                                       ondelete='RESTRICT')
-    tax_resident_co = fields.Boolean(string="Tax resident in Colombia?", default=True)
+    tax_resident_co = fields.Boolean(
+        string="Tax resident in Colombia?", default=True)
     email_edi = fields.Char("Email for invoicing")
 
     trade_name = fields.Char(string="Trade name", copy=False)
@@ -49,9 +50,11 @@ class ResPartner(models.Model):
                                                       copy=False, ondelete='RESTRICT')
     # surname, second_surname, first_name, other_names
     surname = fields.Char("Surname", compute="_compute_names", store=True)
-    second_surname = fields.Char("Second surname", compute="_compute_names", store=True)
+    second_surname = fields.Char(
+        "Second surname", compute="_compute_names", store=True)
     first_name = fields.Char("Name", compute="_compute_names", store=True)
-    other_names = fields.Char("Other names", compute="_compute_names", store=True)
+    other_names = fields.Char(
+        "Other names", compute="_compute_names", store=True)
 
     # Postal fields
     postal_id = fields.Many2one(comodel_name='l10n_co_edi_jorels.postal', copy=True, string="Postal",
@@ -64,7 +67,8 @@ class ResPartner(models.Model):
     @api.depends('l10n_latam_identification_type_id')
     def _compute_type_document_identification_id(self):
         if not self.env['l10n_co_edi_jorels.type_document_identifications'].search_count([]):
-            self.env['res.company'].init_csv_data('l10n_co_edi_jorels.l10n_co_edi_jorels.type_document_identifications')
+            self.env['res.company'].init_csv_data(
+                'l10n_co_edi_jorels.l10n_co_edi_jorels.type_document_identifications')
 
         for rec in self:
             rec.type_document_identification_id = None
@@ -93,7 +97,8 @@ class ResPartner(models.Model):
         for rec in self:
             if rec.zip and rec.country_id and rec.country_id.code == 'CO':
                 postal_obj = rec.env['l10n_co_edi_jorels.postal']
-                postal_search = postal_obj.sudo().search([('name', '=', rec.zip)])
+                postal_search = postal_obj.sudo().search(
+                    [('name', '=', rec.zip.zfill(6))])
                 if postal_search:
                     rec.postal_id = postal_search[0].id
                     rec.postal_department_id = rec.env['l10n_co_edi_jorels.departments'].sudo().search(
