@@ -8,8 +8,8 @@
                 <form string="Barrios">
                     <group>
                         <field name="name" />
-                        <field name="city_id" />
-                        <field name="zona_id" domain="[('city_id', '=', city_id)]" />
+                        <field name="city_id" options="{'no_open': True, 'no_create': True}" />
+                        <field name="zona_id" domain="[('city_id', '=', city_id)]" options="{'no_open': True, 'no_create': True}" />
                     </group>
                 </form>
             </field>
@@ -21,8 +21,8 @@
             <field name="arch" type="xml">
                 <tree string="Barrios" editable="top">
                     <field name="name" />
-                    <field name="city_id" />
-                    <field name="zona_id" domain="[('city_id', '=', city_id)]" />
+                    <field name="city_id" options="{'no_open': True, 'no_create': True}" />
+                    <field name="zona_id" domain="[('city_id', '=', city_id)]" options="{'no_open': True, 'no_create': True}" />
                 </tree>
             </field>
         </record>
