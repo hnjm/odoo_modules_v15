@@ -10,7 +10,7 @@
     "license": "OPL-1",
     "application": False,
     "installable": True,
-    "depends": ["base", "sale"],
+    "depends": ["base", "base_vat", "sale"],
     "data": [
         'views/document_partner_view.xml'
     ],
