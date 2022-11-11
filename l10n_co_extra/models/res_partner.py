@@ -3,6 +3,7 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
+
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
@@ -40,7 +41,8 @@ class ResPartner(models.Model):
     vat_vd = fields.Char('Dígito verificador', size=1, help='VD')
 
     zip_id = fields.Many2one("res.city.zip", "Código postal")
-    city_id = fields.Many2one('res.city', string='Ciudad', ondelete='restrict', required=False)
+    city_id = fields.Many2one(
+        'res.city', string='Ciudad', ondelete='restrict', required=False)
     country_code = fields.Char(related='country_id.code', store=False)
 
     ciiu = fields.Many2many('ciiu', string='Clasificador CIIU')
@@ -50,7 +52,8 @@ class ResPartner(models.Model):
         context = dict(self.env.context)
         name = vals.get("name", context.get("default_name"))
         if name is None:
-             vals["name"] = " ".join(p for p in (vals["firstname"], vals["other_name"], vals["lastname"], vals["other_lastname"]) if p)
+            vals["name"] = " ".join(p for p in (
+                vals["firstname"], vals["other_name"], vals["lastname"], vals["other_lastname"]) if p)
         return super(ResPartner, self.with_context(context)).create(vals)
 
     @api.onchange("person_type")
@@ -63,7 +66,8 @@ class ResPartner(models.Model):
     @api.depends("firstname", "other_name", "lastname", "other_lastname")
     def _compute_name(self):
         for partner in self:
-            partner.name = " ".join(p for p in (partner.firstname, partner.other_name,partner.lastname, partner.other_lastname) if p)
+            partner.name = " ".join(p for p in (
+                partner.firstname, partner.other_name, partner.lastname, partner.other_lastname) if p)
 
     @api.onchange("city_id")
     def _onchange_city_id(self):
@@ -73,9 +77,10 @@ class ResPartner(models.Model):
             self.update({"zip_id": False, "zip": False, "city": False})
         if self.city_id and self.country_enforce_cities:
             zip_principal = False
-            if len(self.city_id.zip_ids)>0:
+            if len(self.city_id.zip_ids) > 0:
                 zip_principal = self.city_id.zip_ids[0].name
-                self.update({"zip": zip_principal, "zip_id":self.city_id.zip_ids[0].id})
+                self.update(
+                    {"zip": zip_principal, "zip_id": self.city_id.zip_ids[0].id})
             return {"domain": {"zip_id": [("city_id", "=", self.city_id.id)]}}
         return {"domain": {"zip_id": []}}
 
@@ -137,7 +142,8 @@ class ResPartner(models.Model):
             vals.update({"zip_id": False, "zip": False, "city": False})
         self.update(vals)
         if self.state_id and not self.zip_id:
-            cities_ids = self.env['res.city'].search([('state_id', '=', self.state_id.id)]).ids
+            cities_ids = self.env['res.city'].search(
+                [('state_id', '=', self.state_id.id)]).ids
             return {'domain': {'zip_id': [('city_id', 'in', cities_ids)],
                                'city_id': [('id', 'in', cities_ids)]}}
 
@@ -174,7 +180,8 @@ class ResPartner(models.Model):
     @api.constrains('vat', 'vat_type', 'country_id')
     def check_vat(self):
         if self.env.context.get('company_id'):
-            company = self.env['res.company'].browse(self.env.context['company_id'])
+            company = self.env['res.company'].browse(
+                self.env.context['company_id'])
         else:
             company = self.env.company
         eu_countries = self.env.ref('base.europe').country_ids
@@ -190,7 +197,7 @@ class ResPartner(models.Model):
                 else:
                     continue
 
-            #check with country code as prefix of the TIN
+            # check with country code as prefix of the TIN
             vat_country, vat_number = self._split_vat(partner.vat)
             if company.vat_check_vies and partner.commercial_partner_id.country_id in eu_countries:
                 # force full VIES online check
@@ -199,9 +206,28 @@ class ResPartner(models.Model):
                 # quick and partial off-line checksum validation
                 check_func = self.simple_vat_check
             if not check_func(vat_country, vat_number):
-                #if fails, check with country code from country
+                # if fails, check with country code from country
                 country_code = partner.commercial_partner_id.country_id.code
                 if country_code:
                     if not check_func(country_code.lower(), partner.vat):
-                        msg = partner._construct_constraint_msg(country_code.lower())
+                        msg = partner._construct_constraint_msg(
+                            country_code.lower())
                         raise ValidationError(msg)
+
+    @api.onchange('firstname', 'other_name', 'lastname', 'other_lastname')
+    def set_upper_name_fields(self):
+        self.firstname = str(self.firstname).upper()
+        self.other_name = str(self.other_name).upper()
+        self.lastname = str(self.lastname).upper()
+        self.other_lastname = str(self.other_lastname).upper()
+        return
+
+    @api.onchange('name')
+    def set_upper_name(self):
+        self.name = str(self.name).upper()
+        return
+
+    @api.onchange('trade_name')
+    def set_upper_trade_name(self):
+        self.trade_name = str(self.trade_name).upper()
+        return

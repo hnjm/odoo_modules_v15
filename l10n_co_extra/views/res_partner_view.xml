@@ -6,6 +6,12 @@
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
 
+
+            <!-- Email required -->
+            <xpath expr="//field[@name='email']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
             <!-- Migraciones a v15 -->
             <xpath expr="//field[@name='parent_id']" position="replace">
                 <field name="parent_id" invisible="1" />
@@ -19,14 +25,12 @@
                 </span>
             </xpath>
 
-
             <xpath expr="//field[@name='street2']" position="replace">
                 <field name="street2" invisible="1" />
             </xpath>
 
-
             <xpath expr="//field[@name='state_id']" position="replace">
-                <field name="state_id" class="o_address_state" placeholder="State" readonly="1" force_save="1" />
+                <field name="state_id" class="o_address_state text-uppercase" placeholder="State" readonly="1" force_save="1" />
             </xpath>
 
             <xpath expr="//field[@name='zip']" position="replace">
@@ -152,14 +156,16 @@
         </field>
     </record>
 
+
     <record id="view_partner_form_inherit_l10n_co_edi_jorels_v15" model="ir.ui.view">
         <field name="name">res.partner.form.inherit.l10n_co_edi_jorels.v15</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="l10n_co_edi_jorels.res_partner_form_view_inherit_l10n_co_edi_jorels" />
         <field name="arch" type="xml">
-            <!-- Migraciones a v15 -->
+            <!-- Migraciones a v15  -->
             <xpath expr="//field[@name='trade_name']" position="replace">
-                <field name="trade_name" invisible="1" />
+                <br />
+                <field name="trade_name" />
             </xpath>
         </field>
     </record>
