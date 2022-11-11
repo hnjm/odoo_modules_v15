@@ -1,0 +1,87 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* acs_purchase_currency_rate
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-06-16 04:50+0000\n"
+"PO-Revision-Date: 2022-06-16 00:17-0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.1\n"
+
+#. module: acs_purchase_currency_rate
+#: model:ir.model.fields,field_description:acs_purchase_currency_rate.field_purchase_order__amount_total_company_currency
+msgid "Amount Total Company Currency"
+msgstr "Valor total en pesos"
+
+#. module: acs_purchase_currency_rate
+#: model:ir.model.fields,field_description:acs_purchase_currency_rate.field_purchase_order__custom_rate
+msgid "Custom Rate"
+msgstr "Tasa de cambio"
+
+#. module: acs_purchase_currency_rate
+#: model:ir.model.fields,field_description:acs_purchase_currency_rate.field_account_move__display_name
+#: model:ir.model.fields,field_description:acs_purchase_currency_rate.field_purchase_order__display_name
+#: model:ir.model.fields,field_description:acs_purchase_currency_rate.field_purchase_order_line__display_name
+#: model:ir.model.fields,field_description:acs_purchase_currency_rate.field_stock_move__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: acs_purchase_currency_rate
+#: model:ir.model.fields,field_description:acs_purchase_currency_rate.field_account_move__id
+#: model:ir.model.fields,field_description:acs_purchase_currency_rate.field_purchase_order__id
+#: model:ir.model.fields,field_description:acs_purchase_currency_rate.field_purchase_order_line__id
+#: model:ir.model.fields,field_description:acs_purchase_currency_rate.field_stock_move__id
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: acs_purchase_currency_rate
+#: model:ir.model,name:acs_purchase_currency_rate.model_account_move
+msgid "Journal Entry"
+msgstr "Asiento contable"
+
+#. module: acs_purchase_currency_rate
+#: model:ir.model.fields,field_description:acs_purchase_currency_rate.field_account_move____last_update
+#: model:ir.model.fields,field_description:acs_purchase_currency_rate.field_purchase_order____last_update
+#: model:ir.model.fields,field_description:acs_purchase_currency_rate.field_purchase_order_line____last_update
+#: model:ir.model.fields,field_description:acs_purchase_currency_rate.field_stock_move____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: acs_purchase_currency_rate
+#: model:ir.model,name:acs_purchase_currency_rate.model_purchase_order
+msgid "Purchase Order"
+msgstr "Pedido de compra"
+
+#. module: acs_purchase_currency_rate
+#: model:ir.model,name:acs_purchase_currency_rate.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Línea de pedido de compra"
+
+#. module: acs_purchase_currency_rate
+#: model:ir.model,name:acs_purchase_currency_rate.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de existencias"
+
+#. module: acs_purchase_currency_rate
+#: model:ir.model.fields,field_description:acs_purchase_currency_rate.field_purchase_order__company_currency_id
+msgid "System Currency"
+msgstr "Moneda"
+
+#. module: acs_purchase_currency_rate
+#: model:ir.model.fields,field_description:acs_purchase_currency_rate.field_purchase_order__not_company_currency
+msgid "Use Custom Currency Rate"
+msgstr "Tipo de cambio"
+
+#. module: acs_purchase_currency_rate
+#: model:ir.model.fields,field_description:acs_purchase_currency_rate.field_purchase_order__use_custom_rate
+msgid "Use Custom Rate"
+msgstr "Ingresar TRM"
