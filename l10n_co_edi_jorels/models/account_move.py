@@ -39,36 +39,48 @@ class AccountMove(models.Model):
     _inherit = "account.move"
     _description = "Electronic invoicing"
 
-    state = fields.Selection(selection_add=[('validate', 'Validating DIAN')], ondelete={'validate': 'set default'})
+    state = fields.Selection(selection_add=[('validate', 'Validating DIAN')], ondelete={
+                             'validate': 'set default'})
     number_formatted = fields.Char(string="Number formatted", compute="compute_number_formatted", store=True,
                                    copy=False)
 
     ei_type_document_id = fields.Many2one(comodel_name='l10n_co_edi_jorels.type_documents', string="Document type",
                                           copy=False, ondelete='RESTRICT')
     ei_customer = fields.Text(string="customer json", copy=False)
-    ei_legal_monetary_totals = fields.Text(string="legal_monetary_totals json", copy=False)
+    ei_legal_monetary_totals = fields.Text(
+        string="legal_monetary_totals json", copy=False)
     ei_invoice_lines = fields.Text(string="invoice_lines json", copy=False)
 
     # They allow to store synchronous and production modes used when invoicing
-    ei_sync = fields.Boolean(string="Sync", default=False, copy=False, readonly=True)
+    ei_sync = fields.Boolean(
+        string="Sync", default=False, copy=False, readonly=True)
     ei_is_not_test = fields.Boolean(string="In production", copy=False, readonly=True,
-                                    default=lambda self: self.env['res.company']._company_default_get().is_not_test,
+                                    default=lambda self: self.env['res.company']._company_default_get(
+                                    ).is_not_test,
                                     store=True, compute="_compute_ei_is_not_test")
 
     # API Response:
-    ei_is_valid = fields.Boolean(string="Valid", copy=False, readonly=True, states={'draft': [('readonly', False)]})
+    ei_is_valid = fields.Boolean(string="Valid", copy=False, readonly=True, states={
+                                 'draft': [('readonly', False)]})
     ei_is_restored = fields.Boolean("Is restored?", copy=False, readonly=True)
     ei_algorithm = fields.Char(string="Algorithm", copy=False, readonly=True)
     ei_class = fields.Char("Class", copy=False, readonly=True)
-    ei_number = fields.Char(string="Number", compute="compute_number_formatted", store=True, copy=False, readonly=True)
-    ei_uuid = fields.Char(string="UUID", copy=False, readonly=True, states={'draft': [('readonly', False)]})
+    ei_number = fields.Char(
+        string="Number", compute="compute_number_formatted", store=True, copy=False, readonly=True)
+    ei_uuid = fields.Char(string="UUID", copy=False, readonly=True, states={
+                          'draft': [('readonly', False)]})
     ei_issue_date = fields.Date(string="Issue date", copy=False, readonly=True,
                                 states={'draft': [('readonly', False)]})
-    ei_expedition_date = fields.Char("Expedition date", copy=False, readonly=True)
-    ei_zip_key = fields.Char(string="Zip key", copy=False, readonly=True, states={'draft': [('readonly', False)]})
-    ei_status_code = fields.Char(string="Status code", copy=False, readonly=True)
-    ei_status_description = fields.Char(string="Status description", copy=False, readonly=True)
-    ei_status_message = fields.Char(string="Status message", copy=False, readonly=True)
+    ei_expedition_date = fields.Char(
+        "Expedition date", copy=False, readonly=True)
+    ei_zip_key = fields.Char(string="Zip key", copy=False, readonly=True, states={
+                             'draft': [('readonly', False)]})
+    ei_status_code = fields.Char(
+        string="Status code", copy=False, readonly=True)
+    ei_status_description = fields.Char(
+        string="Status description", copy=False, readonly=True)
+    ei_status_message = fields.Char(
+        string="Status message", copy=False, readonly=True)
     ei_errors_messages = fields.Text("Message", copy=False, readonly=True)
     ei_xml_name = fields.Char(string="Xml name", copy=False, readonly=True)
     ei_zip_name = fields.Char(string="Zip name", copy=False, readonly=True)
@@ -77,25 +89,32 @@ class AccountMove(models.Model):
     ei_qr_data = fields.Text(string="QR data", copy=False, readonly=True)
     ei_qr_link = fields.Char("QR link", copy=False, readonly=True)
     ei_pdf_download_link = fields.Char("PDF link", copy=False, readonly=True)
-    ei_xml_base64_bytes = fields.Binary('XML', attachment=True, copy=False, readonly=True)
+    ei_xml_base64_bytes = fields.Binary(
+        'XML', attachment=True, copy=False, readonly=True)
     ei_application_response_base64_bytes = fields.Binary("Application response", attachment=True, copy=False,
                                                          readonly=True)
     ei_attached_document_base64_bytes = fields.Binary("Attached document", attachment=True, copy=False, readonly=True,
                                                       states={'draft': [('readonly', False)]})
     ei_pdf_base64_bytes = fields.Binary('Pdf document', attachment=True, copy=False, readonly=True,
                                         states={'draft': [('readonly', False)]})
-    ei_zip_base64_bytes = fields.Binary('Zip document', attachment=True, copy=False, readonly=True)
+    ei_zip_base64_bytes = fields.Binary(
+        'Zip document', attachment=True, copy=False, readonly=True)
     ei_type_environment = fields.Many2one(comodel_name="l10n_co_edi_jorels.type_environments",
                                           string="Type environment", copy=False, readonly=True,
-                                          states={'draft': [('readonly', False)]},
+                                          states={
+                                              'draft': [('readonly', False)]},
                                           default=lambda self: self._default_ei_type_environment())
     ei_payload = fields.Text("Payload", copy=False, readonly=True)
 
     # Old fields, compatibility
-    ei_xml_file_name = fields.Char(string="Xml file name", copy=False, readonly=True)
-    ei_url_acceptance = fields.Char(string="URL acceptance", copy=False, readonly=True)
-    ei_url_rejection = fields.Char(string="URL rejection", copy=False, readonly=True)
-    ei_xml_bytes = fields.Boolean(string="XML Bytes", copy=False, readonly=True)
+    ei_xml_file_name = fields.Char(
+        string="Xml file name", copy=False, readonly=True)
+    ei_url_acceptance = fields.Char(
+        string="URL acceptance", copy=False, readonly=True)
+    ei_url_rejection = fields.Char(
+        string="URL rejection", copy=False, readonly=True)
+    ei_xml_bytes = fields.Boolean(
+        string="XML Bytes", copy=False, readonly=True)
     ei_dian_response_base64_bytes = fields.Binary('DIAN response', attachment=True, copy=False, readonly=True,
                                                   states={'draft': [('readonly', False)]})
 
@@ -104,16 +123,20 @@ class AccountMove(models.Model):
                                                  states={'draft': [('readonly', False)]})
 
     # QR image
-    ei_qr_image = fields.Binary("QR image", attachment=True, copy=False, readonly=True)
+    ei_qr_image = fields.Binary(
+        "QR image", attachment=True, copy=False, readonly=True)
 
     # Total taxes only / without withholdings
-    ei_amount_tax_withholding = fields.Monetary("Withholdings", compute="_compute_amount", store=True)
-    ei_amount_tax_no_withholding = fields.Monetary("Taxes without withholdings", compute="_compute_amount", store=True)
+    ei_amount_tax_withholding = fields.Monetary(
+        "Withholdings", compute="_compute_amount", store=True)
+    ei_amount_tax_no_withholding = fields.Monetary(
+        "Taxes without withholdings", compute="_compute_amount", store=True)
     ei_amount_total_no_withholding = fields.Monetary("Total without withholdings", compute="_compute_amount",
                                                      store=True)
 
     # Total base excluding tax
-    ei_amount_excluded = fields.Monetary("Excluded", compute="_compute_amount", store=True)
+    ei_amount_excluded = fields.Monetary(
+        "Excluded", compute="_compute_amount", store=True)
 
     # Required field for credit and debit notes in DIAN
     ei_correction_concept_id = fields.Many2one(comodel_name='l10n_co_edi_jorels.correction_concepts',
@@ -132,7 +155,8 @@ class AccountMove(models.Model):
     ei_is_correction_without_reference = fields.Boolean("Is it a correction without reference?", default=False,
                                                         readonly=True, states={'draft': [('readonly', False)]})
 
-    value_letters = fields.Char("Value in letters", compute="_compute_amount", store=True)
+    value_letters = fields.Char(
+        "Value in letters", compute="_compute_amount", store=True)
 
     is_attached_document_matched = fields.Boolean("Correct number in attached document?", copy=False,
                                                   compute='_is_attached_document_matched', store=True)
@@ -185,7 +209,8 @@ class AccountMove(models.Model):
                                     store=True, compute="_compute_resolution", ondelete='RESTRICT', readonly=True,
                                     states={'draft': [('readonly', False)]})
 
-    radian_ids = fields.One2many(comodel_name='l10n_co_edi_jorels.radian', inverse_name='move_id')
+    radian_ids = fields.One2many(
+        comodel_name='l10n_co_edi_jorels.radian', inverse_name='move_id')
 
     def dian_preview(self):
         for rec in self:
@@ -207,7 +232,8 @@ class AccountMove(models.Model):
 
     def _default_ei_type_environment(self):
         if not self.env['l10n_co_edi_jorels.type_environments'].search_count([]):
-            self.env['res.company'].init_csv_data('l10n_co_edi_jorels.l10n_co_edi_jorels.type_environments')
+            self.env['res.company'].init_csv_data(
+                'l10n_co_edi_jorels.l10n_co_edi_jorels.type_environments')
         return 1 if self.env['res.company']._company_default_get().is_not_test else 2
 
     @api.depends("ei_type_environment")
@@ -220,13 +246,15 @@ class AccountMove(models.Model):
 
     def _default_payment_method_id(self):
         if not self.env['l10n_co_edi_jorels.payment_methods'].search_count([]):
-            self.env['res.company'].init_csv_data('l10n_co_edi_jorels.l10n_co_edi_jorels.payment_methods')
+            self.env['res.company'].init_csv_data(
+                'l10n_co_edi_jorels.l10n_co_edi_jorels.payment_methods')
         return 1
 
     @api.depends('invoice_date', 'invoice_date_due')
     def _compute_payment_form_id(self):
         if not self.env['l10n_co_edi_jorels.payment_forms'].search_count([]):
-            self.env['res.company'].init_csv_data('l10n_co_edi_jorels.l10n_co_edi_jorels.payment_forms')
+            self.env['res.company'].init_csv_data(
+                'l10n_co_edi_jorels.l10n_co_edi_jorels.payment_forms')
 
         for rec in self:
             if rec.invoice_date and rec.invoice_date_due:
@@ -334,20 +362,23 @@ class AccountMove(models.Model):
                 if rec.partner_id.email:
                     email_edi = rec.partner_id.email
                 else:
-                    raise UserError(_("The client must have an email where to send the invoice."))
+                    raise UserError(
+                        _("The client must have an email where to send the invoice."))
             else:
                 rec_partner = rec.partner_id
 
                 if rec_partner.email_edi:
                     email_edi = rec_partner.email_edi
                 else:
-                    raise UserError(_("The client must have an email where to send the invoice."))
+                    raise UserError(
+                        _("The client must have an email where to send the invoice."))
 
             type_document_identification_id = rec.get_type_document_identification_id()
             if type_document_identification_id:
                 if rec.partner_id.vat:
                     if type_document_identification_id in (1, 2, 3, 4, 5, 6, 10):
-                        identification_number_general = ''.join([i for i in rec.partner_id.vat if i.isdigit()])
+                        identification_number_general = ''.join(
+                            [i for i in rec.partner_id.vat if i.isdigit()])
                     else:
                         identification_number_general = rec.partner_id.vat
 
@@ -386,32 +417,39 @@ class AccountMove(models.Model):
                             if customer_rec:
                                 customer_data['country_code'] = customer_rec.id
                             else:
-                                raise UserError(_("You must assign the client a valid country"))
+                                raise UserError(
+                                    _("You must assign the client a valid country"))
                         else:
-                            raise UserError(_("You must assign the client a country"))
+                            raise UserError(
+                                _("You must assign the client a country"))
 
                         if rec_partner.country_id.code == 'CO' and rec.is_out_country:
-                            raise UserError(_("This is an export invoice but the client's country is Colombia"))
+                            raise UserError(
+                                _("This is an export invoice but the client's country is Colombia"))
 
                         if rec_partner.municipality_id and rec_partner.country_id.code == 'CO':
                             customer_data['municipality_code'] = rec_partner.municipality_id.id
                         elif rec_partner.country_id.code == 'CO':
-                            raise UserError(_("You must assign the client a municipality"))
+                            raise UserError(
+                                _("You must assign the client a municipality"))
 
                         if rec_partner.type_regime_id:
                             customer_data['regime_code'] = rec_partner.type_regime_id.id
                         else:
-                            raise UserError(_("You must assign the client a type of regimen"))
+                            raise UserError(
+                                _("You must assign the client a type of regimen"))
 
                         if rec_partner.type_liability_id:
                             customer_data['liability_code'] = rec_partner.type_liability_id.id
                         else:
-                            raise UserError(_("You must assign the customer a type of liability"))
+                            raise UserError(
+                                _("You must assign the customer a type of liability"))
 
                         if rec.partner_id.phone:
                             phone = rec.partner_id.phone
                             if phone[:3] == '+57':
-                                temp_phone = ''.join([i for i in phone[3:] if i.isdigit()])
+                                temp_phone = ''.join(
+                                    [i for i in phone[3:] if i.isdigit()])
                                 phone = temp_phone
                             if phone:
                                 customer_data['phone'] = phone
@@ -423,9 +461,11 @@ class AccountMove(models.Model):
 
                         return customer_data
                 else:
-                    raise UserError(_("The client does not have an identification document number."))
+                    raise UserError(
+                        _("The client does not have an identification document number."))
             else:
-                raise UserError(_("The client does not have an associated identification document type."))
+                raise UserError(
+                    _("The client does not have an associated identification document type."))
         return False
 
     def get_ei_legal_monetary_totals(self):
@@ -439,7 +479,8 @@ class AccountMove(models.Model):
 
         charge_total_amount = 0.0
         payable_amount = self.ei_amount_total_no_withholding
-        tax_inclusive_amount = payable_amount - charge_total_amount + allowance_total_amount
+        tax_inclusive_amount = payable_amount - \
+            charge_total_amount + allowance_total_amount
 
         return {
             "line_extension_value": line_extension_amount,
@@ -454,46 +495,58 @@ class AccountMove(models.Model):
             for invoice_line_id in rec.invoice_line_ids:
                 if invoice_line_id.account_id:
                     if not (0 <= invoice_line_id.discount < 100):
-                        raise UserError(_("The discount must always be greater than or equal to 0 and less than 100."))
+                        raise UserError(
+                            _("The discount must always be greater than or equal to 0 and less than 100."))
 
                     price_unit = 100.0 * invoice_line_id.price_subtotal / (invoice_line_id.quantity * (
-                            100.0 - invoice_line_id.discount))
+                        100.0 - invoice_line_id.discount))
                     # The temporary dictionary of elements that belong to the specific line
                     invoice_temps = {}
                     products = {}
                     allowance_charges = {}
                     tax_totals = {'tax_totals': []}
                     products.update({'price_value': price_unit})
-                    products.update({'base_quantity': invoice_line_id.quantity})
+                    products.update(
+                        {'base_quantity': invoice_line_id.quantity})
 
                     if invoice_line_id.product_id.code:
-                        products.update({'product_ref': invoice_line_id.product_id.code})
+                        products.update(
+                            {'product_ref': invoice_line_id.product_id.code})
                     else:
-                        raise UserError(_("All products must have an internal reference assigned"))
+                        raise UserError(
+                            _("All products must have an internal reference assigned"))
 
                     if rec.is_out_country:
                         if invoice_line_id.product_id.brand_name:
-                            products.update({'brand_name': invoice_line_id.product_id.brand_name})
+                            products.update(
+                                {'brand_name': invoice_line_id.product_id.brand_name})
                         else:
-                            raise UserError(_("Products on export invoices must have a brand name"))
+                            raise UserError(
+                                _("Products on export invoices must have a brand name"))
 
                         if invoice_line_id.product_id.model_name:
-                            products.update({'model_name': invoice_line_id.product_id.model_name})
+                            products.update(
+                                {'model_name': invoice_line_id.product_id.model_name})
                         else:
-                            raise UserError(_("Products on export invoices must have a model name"))
+                            raise UserError(
+                                _("Products on export invoices must have a model name"))
 
                     products.update({'description': invoice_line_id.name})
 
                     if invoice_line_id.ei_notes:
-                        products.update({'notes': [{'text': invoice_line_id.ei_notes}]})
+                        products.update(
+                            {'notes': [{'text': invoice_line_id.ei_notes}]})
 
                     if invoice_line_id.product_uom_id.edi_unit_measure_id.id:
-                        products.update({'uom_code': invoice_line_id.product_uom_id.edi_unit_measure_id.id})
+                        products.update(
+                            {'uom_code': invoice_line_id.product_uom_id.edi_unit_measure_id.id})
                     else:
-                        raise UserError(_("All products must be assigned a unit of measure (DIAN)"))
+                        raise UserError(
+                            _("All products must be assigned a unit of measure (DIAN)"))
 
                     products.update({'quantity': invoice_line_id.quantity})
-                    products.update({'line_extension_value': invoice_line_id.price_subtotal})
+                    products.update(
+                        {'line_extension_value': invoice_line_id.price_subtotal})
                     # [4]: Taxpayer adoption standard ('999')
                     products.update({'item_code': 4})
 
@@ -502,7 +555,7 @@ class AccountMove(models.Model):
                         discount = True
                         allowance_charges.update({'indicator': False})
                         amount = invoice_line_id.price_subtotal * invoice_line_id.discount / (
-                                100.0 - invoice_line_id.discount)
+                            100.0 - invoice_line_id.discount)
                         base_amount = invoice_line_id.price_subtotal + amount
                         allowance_charge_reason = "Descuento"
                     else:
@@ -512,13 +565,15 @@ class AccountMove(models.Model):
                         base_amount = 0
                         allowance_charge_reason = ""
 
-                    products.update({'price_code': 1})  # Commercial value ('01')
+                    # Commercial value ('01')
+                    products.update({'price_code': 1})
 
                     taxable_amount = invoice_line_id.price_subtotal
 
                     allowance_charges.update({'base_value': base_amount})
                     allowance_charges.update({'value': amount})
-                    allowance_charges.update({'reason': allowance_charge_reason})
+                    allowance_charges.update(
+                        {'reason': allowance_charge_reason})
 
                     # Calculate tax totals for invoice line
                     for invoice_line_tax_id in invoice_line_id.tax_ids:
@@ -530,37 +585,47 @@ class AccountMove(models.Model):
                             # The information sent to DIAN should not include the withholdings
                             if edi_tax_name[:4] != 'Rete' and tax_name not in ('IVA Excluido', 'IVA Compra Excluido'):
                                 if invoice_line_tax_id.amount_type == 'percent':
-                                    tax_total.update({'code': invoice_line_tax_id.edi_tax_id.id})
+                                    tax_total.update(
+                                        {'code': invoice_line_tax_id.edi_tax_id.id})
                                     tax_total.update(
                                         {'tax_value': (taxable_amount * invoice_line_tax_id.amount) / 100.0})
-                                    tax_total.update({'taxable_value': taxable_amount})
-                                    tax_total.update({'percent': invoice_line_tax_id.amount})
+                                    tax_total.update(
+                                        {'taxable_value': taxable_amount})
+                                    tax_total.update(
+                                        {'percent': invoice_line_tax_id.amount})
                                     tax_totals['tax_totals'].append(tax_total)
                                 elif invoice_line_tax_id.amount_type == 'fixed':
-                                    tax_total.update({'code': invoice_line_tax_id.edi_tax_id.id})
+                                    tax_total.update(
+                                        {'code': invoice_line_tax_id.edi_tax_id.id})
                                     tax_total.update(
                                         {'tax_value': invoice_line_id.quantity * invoice_line_tax_id.amount})
-                                    tax_total.update({'taxable_value': invoice_line_id.quantity})
+                                    tax_total.update(
+                                        {'taxable_value': invoice_line_id.quantity})
                                     # "886","number of international units","NIU"
                                     tax_total.update({'uom_code': 886})
-                                    tax_total.update({'unit_value': invoice_line_tax_id.amount})
+                                    tax_total.update(
+                                        {'unit_value': invoice_line_tax_id.amount})
                                     tax_total.update({'base_uom': "1.000000"})
                                     tax_totals['tax_totals'].append(tax_total)
                                 else:
-                                    raise UserError(_("Electronic invoicing is not yet compatible with this tax type."))
+                                    raise UserError(
+                                        _("Electronic invoicing is not yet compatible with this tax type."))
                         else:
-                            raise UserError(_("All taxes must be assigned a tax type (DIAN)."))
+                            raise UserError(
+                                _("All taxes must be assigned a tax type (DIAN)."))
 
                     # UPDATE ALL THE ELEMENTS OF THE PRODUCT
                     invoice_temps.update(products)
 
                     # UPDATE ALL PRODUCT DISCOUNTS (* ONLY ONE IS SUPPOSED *)
                     if discount:
-                        invoice_temps.update({'allowance_charges': [allowance_charges]})
+                        invoice_temps.update(
+                            {'allowance_charges': [allowance_charges]})
 
                     # Taxes are attached inside this json
                     if tax_totals['tax_totals']:
-                        invoice_temps.update({'tax_totals': tax_totals['tax_totals']})
+                        invoice_temps.update(
+                            {'tax_totals': tax_totals['tax_totals']})
                     else:
                         invoice_temps.pop("price_code")
 
@@ -573,7 +638,8 @@ class AccountMove(models.Model):
                         if invoice_line_id.waypoint_id:
                             # Check field values
                             if not invoice_line_id.waypoint_id.name_seq:
-                                raise UserError(_("A waypoint doesn't have an associated id number"))
+                                raise UserError(
+                                    _("A waypoint doesn't have an associated id number"))
                             if not invoice_line_id.waypoint_id.total:
                                 raise UserError(_("The waypoint %s doesn't have an total")
                                                 % invoice_line_id.waypoint_id.name_seq)
@@ -605,7 +671,8 @@ class AccountMove(models.Model):
                                     'value': invoice_line_id.waypoint_id.rndc_ingresoid
                                 })
 
-                            invoice_temps.update({'item_properties': item_properties})
+                            invoice_temps.update(
+                                {'item_properties': item_properties})
 
                         else:
                             # Additional service
@@ -613,7 +680,8 @@ class AccountMove(models.Model):
 
                     # Mandates compatibility
                     if rec.ei_operation == 'mandates':
-                        raise UserError(_("Electronic invoicing does not yet support mandates"))
+                        raise UserError(
+                            _("Electronic invoicing does not yet support mandates"))
 
                     if rec.ei_type_document_id.id == 12:
                         # Support document
@@ -665,34 +733,37 @@ class AccountMove(models.Model):
 
                     rec.ei_amount_tax_withholding = amount_tax_withholding
                     rec.ei_amount_tax_no_withholding = amount_tax_no_withholding
-                    rec.ei_amount_total_no_withholding = rec.amount_untaxed + rec.ei_amount_tax_no_withholding
+                    rec.ei_amount_total_no_withholding = rec.amount_untaxed + \
+                        rec.ei_amount_tax_no_withholding
                     rec.ei_amount_excluded = amount_excluded
 
                     if self.is_universal_discount():
                         if not ('ks_global_tax_rate' in rec):
                             rec.ks_calculate_discount()
-                        sign = rec.move_type in ['in_refund', 'out_refund'] and -1 or 1
+                        sign = rec.move_type in [
+                            'in_refund', 'out_refund'] and -1 or 1
                         rec.amount_residual_signed = rec.amount_total * sign
                         rec.amount_total_signed = rec.amount_total * sign
 
                         rec.ei_amount_total_no_withholding = rec.amount_untaxed + \
-                                                             rec.ei_amount_tax_no_withholding - \
-                                                             rec.ks_amount_discount
+                            rec.ei_amount_tax_no_withholding - \
+                            rec.ks_amount_discount
 
                     # Value in letters
                     decimal_part, integer_part = math.modf(rec.amount_total)
                     if decimal_part:
-                        decimal_part = round(decimal_part * math.pow(10, rec.currency_id.decimal_places))
+                        decimal_part = round(
+                            decimal_part * math.pow(10, rec.currency_id.decimal_places))
                     if integer_part:
                         lang = rec.partner_id.lang if rec.partner_id.lang else 'es_CO'
 
                         rec.value_letters = num2words(integer_part, lang=lang).upper() + ' ' + \
-                                            rec.currency_id.currency_unit_label.upper()
+                            rec.currency_id.currency_unit_label.upper()
 
                         if decimal_part:
                             rec.value_letters = rec.value_letters + ', ' + \
-                                                num2words(decimal_part, lang=lang).upper() + ' ' + \
-                                                rec.currency_id.currency_subunit_label.upper() + '.'
+                                num2words(decimal_part, lang=lang).upper() + ' ' + \
+                                rec.currency_id.currency_subunit_label.upper() + '.'
         return res
 
     def get_ei_payment_form(self):
@@ -703,7 +774,8 @@ class AccountMove(models.Model):
                     duration_measure = 0
                 else:
                     # Credit
-                    duration_measure = (rec.invoice_date_due - rec.invoice_date).days
+                    duration_measure = (
+                        rec.invoice_date_due - rec.invoice_date).days
                 payment_due_date = fields.Date.to_string(rec.invoice_date_due)
             else:
                 _logger.debug("The invoice or payment date is not valid")
@@ -734,25 +806,33 @@ class AccountMove(models.Model):
             if type_edi_document == 'invoice':
                 # Sales invoice
                 if not self.is_out_country:
-                    type_documents_rec = type_documents_env.search([('code', '=', '01')])
+                    type_documents_rec = type_documents_env.search(
+                        [('code', '=', '01')])
                 else:
-                    type_documents_rec = type_documents_env.search([('code', '=', '02')])
+                    type_documents_rec = type_documents_env.search(
+                        [('code', '=', '02')])
             elif type_edi_document == 'credit_note':
                 # Credit note
-                type_documents_rec = type_documents_env.search([('code', '=', '91')])
+                type_documents_rec = type_documents_env.search(
+                    [('code', '=', '91')])
             elif type_edi_document == 'debit_note':
                 # Debit note
-                type_documents_rec = type_documents_env.search([('code', '=', '92')])
+                type_documents_rec = type_documents_env.search(
+                    [('code', '=', '92')])
             elif type_edi_document == 'doc_support':
                 # Document support
-                type_documents_rec = type_documents_env.search([('code', '=', '05')])
+                type_documents_rec = type_documents_env.search(
+                    [('code', '=', '05')])
             elif type_edi_document == 'note_support':
                 # Note Document Support
-                type_documents_rec = type_documents_env.search([('code', '=', '95')])
+                type_documents_rec = type_documents_env.search(
+                    [('code', '=', '95')])
             else:
-                raise UserError(_("This type of document does not need to be sent to DIAN"))
+                raise UserError(
+                    _("This type of document does not need to be sent to DIAN"))
         else:
-            raise UserError(_("This type of document does not need to be sent to DIAN"))
+            raise UserError(
+                _("This type of document does not need to be sent to DIAN"))
 
         self.ei_type_document_id = type_documents_rec.id
 
@@ -784,7 +864,8 @@ class AccountMove(models.Model):
                     rec.resolution_id = rec.journal_id.resolution_debit_note_id.id
                 else:
                     rec.resolution_id = None
-                    _logger.debug("This type of document does not have a DIAN resolution assigned")
+                    _logger.debug(
+                        "This type of document does not have a DIAN resolution assigned")
             else:
                 rec.resolution_id = None
 
@@ -803,7 +884,8 @@ class AccountMove(models.Model):
                     len_prefix = len(prefix)
                     len_name = len(name)
                     if 0 < len_prefix < len_name and name[0:len_prefix] == prefix:
-                        number_unformatted = ''.join([i for i in name[len_prefix:] if i.isdigit()])
+                        number_unformatted = ''.join(
+                            [i for i in name[len_prefix:] if i.isdigit()])
                         if number_unformatted:
                             ei_number = str(int(number_unformatted))
                             number_formatted = prefix + ei_number
@@ -866,7 +948,8 @@ class AccountMove(models.Model):
 
                 # Check resolution
                 if not rec.resolution_id:
-                    raise UserError(_("This type of document does not have a DIAN resolution assigned"))
+                    raise UserError(
+                        _("This type of document does not have a DIAN resolution assigned"))
 
                 json_request = {
                     'number': rec.ei_number,
@@ -892,7 +975,8 @@ class AccountMove(models.Model):
 
                 # Due date
                 if rec.invoice_date_due:
-                    json_request['due_date'] = fields.Date.to_string(rec.invoice_date_due)
+                    json_request['due_date'] = fields.Date.to_string(
+                        rec.invoice_date_due)
 
                 # Period
                 if rec.date_start and rec.date_end:
@@ -907,7 +991,8 @@ class AccountMove(models.Model):
                         'number': rec.order_ref_number
                     }
                     if rec.order_ref_date:
-                        json_request['order_reference']['issue_date'] = fields.Date.to_string(rec.order_ref_date)
+                        json_request['order_reference']['issue_date'] = fields.Date.to_string(
+                            rec.order_ref_date)
 
                 # Multi-currency compatibility
                 if rec.currency_id and rec.company_id and rec.currency_id != rec.company_id.currency_id:
@@ -915,8 +1000,10 @@ class AccountMove(models.Model):
                     invoice_currency_code = rec.currency_id.name
 
                     type_currencies_env = self.env['l10n_co_edi_jorels.type_currencies']
-                    company_currency_search = type_currencies_env.search([('code', '=', company_currency_code)])
-                    invoice_currency_search = type_currencies_env.search([('code', '=', invoice_currency_code)])
+                    company_currency_search = type_currencies_env.search(
+                        [('code', '=', company_currency_code)])
+                    invoice_currency_search = type_currencies_env.search(
+                        [('code', '=', invoice_currency_code)])
 
                     # The if is to make sure the name in currency_id,
                     # have a match in the code in type_currencies of the DIAN
@@ -939,7 +1026,8 @@ class AccountMove(models.Model):
                         else:
                             calculation_rate = rec.currency_id.inverse_rate
 
-                        rate_date = rec.date or rec.invoice_date or fields.Date.context_today(self)
+                        rate_date = rec.date or rec.invoice_date or fields.Date.context_today(
+                            self)
 
                         json_request['currency_code'] = invoice_currency_search.id
                         json_request['exchange_rate'] = {
@@ -948,7 +1036,8 @@ class AccountMove(models.Model):
                             'date': str(rate_date)
                         }
                     else:
-                        raise UserError(_("A currency type in Odoo does not correspond to any DIAN currency type"))
+                        raise UserError(
+                            _("A currency type in Odoo does not correspond to any DIAN currency type"))
 
                 if self.is_universal_discount():
                     if rec.ks_amount_discount:
@@ -968,7 +1057,8 @@ class AccountMove(models.Model):
                 type_edi_document = rec.get_type_edi_document()
                 invoice_rec = None
                 if type_edi_document != 'none':
-                    json_request['legal_monetary_totals'] = rec.get_ei_legal_monetary_totals()
+                    json_request['legal_monetary_totals'] = rec.get_ei_legal_monetary_totals(
+                    )
                     json_request['lines'] = rec.get_ei_lines()
                     json_request['payment_forms'] = [rec.get_ei_payment_form()]
                     if type_edi_document in ('invoice', 'doc_support'):
@@ -977,18 +1067,22 @@ class AccountMove(models.Model):
                     elif type_edi_document in ('credit_note', 'note_support'):
                         # Credit note
                         invoice_env = self.env['account.move']
-                        invoice_rec = invoice_env.search([('id', '=', rec.reversed_entry_id.id)])
+                        invoice_rec = invoice_env.search(
+                            [('id', '=', rec.reversed_entry_id.id)])
                         billing_reference = True
                     elif type_edi_document == 'debit_note':
                         # Debit note
                         if self.is_debit_note_module():
                             invoice_env = self.env['account.move']
-                            invoice_rec = invoice_env.search([('id', '=', rec.debit_origin_id.id)])
+                            invoice_rec = invoice_env.search(
+                                [('id', '=', rec.debit_origin_id.id)])
                             billing_reference = True
                         else:
-                            raise UserError(_("The debit notes module has not been installed."))
+                            raise UserError(
+                                _("The debit notes module has not been installed."))
                 else:
-                    raise UserError(_("This type of document does not need to be sent to DIAN"))
+                    raise UserError(
+                        _("This type of document does not need to be sent to DIAN"))
 
                 # Billing reference
                 if billing_reference:
@@ -1000,7 +1094,8 @@ class AccountMove(models.Model):
                             "description": rec.ref if rec.ref else ''
                         }
                     else:
-                        raise UserError(_("You need to select a correction code first"))
+                        raise UserError(
+                            _("You need to select a correction code first"))
 
                     if not rec.ei_is_correction_without_reference:
                         if invoice_rec and invoice_rec.ei_uuid:
@@ -1010,7 +1105,8 @@ class AccountMove(models.Model):
                                 "issue_date": fields.Date.to_string(invoice_rec.ei_issue_date)
                             }
                         else:
-                            raise UserError(_("The reference invoice has not yet been validated before the DIAN"))
+                            raise UserError(
+                                _("The reference invoice has not yet been validated before the DIAN"))
                     elif type_edi_document == 'note_support':
                         raise UserError(
                             _("The credit note for document support cannot be a correction without reference"))
@@ -1025,7 +1121,8 @@ class AccountMove(models.Model):
                             notes.append({'text': narration})
                     json_request['notes'] = notes
             else:
-                raise UserError(_("This type of document does not need to be sent to DIAN"))
+                raise UserError(
+                    _("This type of document does not need to be sent to DIAN"))
 
             return json_request
 
@@ -1064,7 +1161,8 @@ class AccountMove(models.Model):
                     and rec.resolution_id.resolution_type_document_id.id == 12:
                 if ('debit_origin_id' in rec) and rec.debit_origin_id:
                     # There is no debit note for document support
-                    raise UserError(_("There is not debit note for electronic document support"))
+                    raise UserError(
+                        _("There is not debit note for electronic document support"))
                 else:
                     # Document support
                     type_edi_document = 'doc_support'
@@ -1081,11 +1179,13 @@ class AccountMove(models.Model):
                 continue
 
             # raise UserError(json.dumps(rec.get_json_request(), indent=2, sort_keys=False))
-            _logger.debug("DIAN Validation Request: %s", json.dumps(rec.get_json_request(), indent=2, sort_keys=False))
+            _logger.debug("DIAN Validation Request: %s", json.dumps(
+                rec.get_json_request(), indent=2, sort_keys=False))
 
             try:
                 if rec.state == 'draft':
-                    raise UserError(_("The invoice must first be validated in Odoo, before being sent to the DIAN."))
+                    raise UserError(
+                        _("The invoice must first be validated in Odoo, before being sent to the DIAN."))
 
                 type_edi_document = rec.get_type_edi_document()
                 if type_edi_document != 'none' and not rec.ei_is_valid and not rec.is_journal_pos():
@@ -1117,11 +1217,13 @@ class AccountMove(models.Model):
                             test_set_id = rec.company_id.test_set_id
                             params['test_set_id'] = test_set_id
                         else:
-                            raise UserError(_("You have not configured a 'TestSetId'."))
+                            raise UserError(
+                                _("You have not configured a 'TestSetId'."))
 
                     _logger.debug('API URL: %s', api_url)
 
-                    num_attemps = int(self.env['ir.config_parameter'].sudo().get_param('jorels.edipo.num_attemps', '2'))
+                    num_attemps = int(self.env['ir.config_parameter'].sudo(
+                    ).get_param('jorels.edipo.num_attemps', '2'))
                     if is_test or not rec.ei_is_not_test:
                         num_attemps = 1
 
@@ -1143,40 +1245,50 @@ class AccountMove(models.Model):
                         raise UserError(response['detail'])
                     if 'message' in response:
                         if response['message'] == 'Unauthenticated.' or response['message'] == '':
-                            raise UserError(_("Authentication error with the API"))
+                            raise UserError(
+                                _("Authentication error with the API"))
                         else:
                             if 'errors' in response:
-                                raise UserError(response['message'] + '/ errors: ' + str(response['errors']))
+                                raise UserError(
+                                    response['message'] + '/ errors: ' + str(response['errors']))
                             else:
                                 raise UserError(response['message'])
                     elif 'is_valid' in response:
-                        rec.write_response(response, json.dumps(requests_data, indent=2, sort_keys=False))
+                        rec.write_response(response, json.dumps(
+                            requests_data, indent=2, sort_keys=False))
                         if response['is_valid']:
                             # self.env.user.notify_success(message=_("The validation at DIAN has been successful."))
-                            _logger.debug("The validation at DIAN has been successful.")
+                            _logger.debug(
+                                "The validation at DIAN has been successful.")
                         elif 'uuid' in response:
                             if response['uuid'] != "":
                                 if not rec.ei_is_not_test:
                                     # self.env.user.notify_success(message=_("Document sent to DIAN in habilitation."))
-                                    _logger.debug("Document sent to DIAN in habilitation.")
+                                    _logger.debug(
+                                        "Document sent to DIAN in habilitation.")
                                 else:
                                     temp_message = {rec.ei_status_message, rec.ei_errors_messages,
                                                     rec.ei_status_description, rec.ei_status_code}
                                     raise UserError(str(temp_message))
                             else:
-                                raise UserError(_('A valid UUID was not obtained. Try again.'))
+                                raise UserError(
+                                    _('A valid UUID was not obtained. Try again.'))
                         else:
-                            raise UserError(_('The document could not be validated in DIAN.'))
+                            raise UserError(
+                                _('The document could not be validated in DIAN.'))
                     else:
-                        raise UserError(_("No logical response was obtained from the API."))
+                        raise UserError(
+                            _("No logical response was obtained from the API."))
                 else:
-                    _logger.debug("This document does not need to be sent to the DIAN")
+                    _logger.debug(
+                        "This document does not need to be sent to the DIAN")
             except Exception as e:
                 _logger.debug("Failed to process the request: %s", e)
                 if not rec.company_id.ei_always_validate:
                     raise UserError(_("Failed to process the request: %s") % e)
                 else:
-                    rec.message_post(body=_("DIAN Electronic invoicing: Failed to process the request: %s") % e)
+                    rec.message_post(
+                        body=_("DIAN Electronic invoicing: Failed to process the request: %s") % e)
 
             if not is_test and not rec.ei_attached_document_base64_bytes:
                 rec.status_document_log()
@@ -1209,41 +1321,47 @@ class AccountMove(models.Model):
         res = super(AccountMove, self)._post(soft)
 
         to_edi = self.filtered(lambda inv: inv.company_id.ei_enable
-                                           and inv.get_type_edi_document() != 'none'
-                                           and not inv.ei_is_valid
-                                           and not inv.is_journal_pos()
+                               and inv.get_type_edi_document() != 'none'
+                               and not inv.ei_is_valid
+                               and not inv.is_journal_pos()
                                )
         if to_edi:
             # Invoices in DIAN cannot be validated with zero total
-            to_paid_invoices = to_edi.filtered(lambda inv: inv.currency_id.is_zero(inv.amount_total))
+            to_paid_invoices = to_edi.filtered(
+                lambda inv: inv.currency_id.is_zero(inv.amount_total))
             if to_paid_invoices:
-                raise UserError(_('Please check your invoice again. Are you really billing something?'))
+                raise UserError(
+                    _('Please check your invoice again. Are you really billing something?'))
 
             # Validate invoices
             to_electronic_invoices = to_edi.filtered(lambda inv: inv.state == 'posted'
-                                                                 and not inv.company_id.enable_validate_state)
+                                                     and not inv.company_id.enable_validate_state)
             if to_electronic_invoices:
-                to_electronic_invoices.filtered(lambda inv: inv.write({'ei_is_not_test': inv.company_id.is_not_test}))
+                to_electronic_invoices.filtered(lambda inv: inv.write(
+                    {'ei_is_not_test': inv.company_id.is_not_test}))
 
                 # Production invoices
-                to_production_invoices = to_electronic_invoices.filtered(lambda inv: inv.ei_is_not_test)
+                to_production_invoices = to_electronic_invoices.filtered(
+                    lambda inv: inv.ei_is_not_test)
                 if to_production_invoices:
                     to_production_invoices.validate_dian_generic(False)
                     to_mass_send = to_production_invoices.filtered(
                         lambda inv: inv.company_id.enable_mass_send_print
-                                    and inv.move_type in ('out_invoice', 'out_refund')
-                                    and inv.ei_is_valid
+                        and inv.move_type in ('out_invoice', 'out_refund')
+                        and inv.ei_is_valid
                     )
                     if to_mass_send:
                         try:
                             to_mass_send.mass_send_print()
                         except Exception as e:
                             # self.env.user.notify_danger(message=_('The invoice email could not be sent'))
-                            _logger.debug("The invoice email could not be sent")
+                            _logger.debug(
+                                "The invoice email could not be sent")
                             _logger.error('mass_send_print error: %s' % e)
 
                 # Test invoices
-                to_test_invoices = to_electronic_invoices.filtered(lambda inv: not inv.ei_is_not_test)
+                to_test_invoices = to_electronic_invoices.filtered(
+                    lambda inv: not inv.ei_is_not_test)
                 if to_test_invoices:
                     to_test_invoices.validate_dian_generic(True)
 
@@ -1276,7 +1394,8 @@ class AccountMove(models.Model):
                             'token': token,
                             'environment': 1 if rec.ei_is_not_test else 2
                         }
-                        header = {"accept": "application/json", "Content-Type": "application/json"}
+                        header = {"accept": "application/json",
+                                  "Content-Type": "application/json"}
 
                         if rec.ei_zip_key:
                             api_url = api_url + "/zip/" + rec.ei_zip_key
@@ -1295,36 +1414,46 @@ class AccountMove(models.Model):
                             raise UserError(response['detail'])
                         if 'message' in response:
                             if response['message'] == 'Unauthenticated.' or response['message'] == '':
-                                raise UserError(_("Authentication error with the API"))
+                                raise UserError(
+                                    _("Authentication error with the API"))
                             else:
                                 if 'errors' in response:
-                                    raise UserError(response['message'] + '/ errors: ' + str(response['errors']))
+                                    raise UserError(
+                                        response['message'] + '/ errors: ' + str(response['errors']))
                                 else:
                                     raise UserError(response['message'])
                         elif 'is_valid' in response:
-                            rec.write_response(response, json.dumps(requests_data, indent=2, sort_keys=False))
+                            rec.write_response(response, json.dumps(
+                                requests_data, indent=2, sort_keys=False))
                             if response['is_valid']:
                                 # self.env.user.notify_info(message=_("Validation in DIAN has been successful."))
-                                _logger.debug("Validation in DIAN has been successful.")
+                                _logger.debug(
+                                    "Validation in DIAN has been successful.")
                             elif 'zip_key' in response or 'uuid' in response:
                                 if response['zip_key'] is not None or response['uuid'] is not None:
                                     if not rec.ei_is_not_test:
                                         # self.env.user.notify_info(message=_("Document sent to DIAN in testing."))
-                                        _logger.debug("Document sent to DIAN in testing.")
+                                        _logger.debug(
+                                            "Document sent to DIAN in testing.")
                                     else:
                                         temp_message = {rec.ei_status_message, rec.ei_errors_messages,
                                                         rec.ei_status_description, rec.ei_status_code}
                                         raise UserError(str(temp_message))
                                 else:
-                                    raise UserError(_('A valid Zip key or UUID was not obtained. Try again.'))
+                                    raise UserError(
+                                        _('A valid Zip key or UUID was not obtained. Try again.'))
                             else:
-                                raise UserError(_('The document could not be validated in DIAN.'))
+                                raise UserError(
+                                    _('The document could not be validated in DIAN.'))
                         else:
-                            raise UserError(_("No logical response was obtained from the API"))
+                            raise UserError(
+                                _("No logical response was obtained from the API"))
                     else:
-                        raise UserError(_("A Zip key or UUID is required to check the status of the document."))
+                        raise UserError(
+                            _("A Zip key or UUID is required to check the status of the document."))
                 else:
-                    raise UserError(_("This type of document does not need to be sent to the DIAN"))
+                    raise UserError(
+                        _("This type of document does not need to be sent to the DIAN"))
             except Exception as e:
                 _logger.debug("Failed to process the request: %s", e)
                 raise UserError(_("Failed to process the request: %s") % e)
@@ -1354,7 +1483,8 @@ class AccountMove(models.Model):
                         api_url = self.env['ir.config_parameter'].sudo().get_param('jorels.edipo.api_url',
                                                                                    'https://edipo.jorels.com')
                         params = {'token': token}
-                        header = {"accept": "application/json", "Content-Type": "application/json"}
+                        header = {"accept": "application/json",
+                                  "Content-Type": "application/json"}
 
                         api_url = api_url + "/logs/" + rec.number_formatted
 
@@ -1371,12 +1501,14 @@ class AccountMove(models.Model):
                         if 'message' in response:
                             if response['message'] == 'Unauthenticated.' or response['message'] == '':
                                 # self.env.user.notify_warning(message=_("Authentication error with the API"))
-                                _logger.debug("Authentication error with the API")
+                                _logger.debug(
+                                    "Authentication error with the API")
                             else:
                                 if 'errors' in response:
                                     # self.env.user.notify_warning(
                                     #     message=response['message'] + '/ errors: ' + str(response['errors']))
-                                    _logger.debug(response['message'] + '/ errors: ' + str(response['errors']))
+                                    _logger.debug(
+                                        response['message'] + '/ errors: ' + str(response['errors']))
                                 else:
                                     # self.env.user.notify_warning(message=response['message'])
                                     _logger.debug(response['message'])
@@ -1427,27 +1559,33 @@ class AccountMove(models.Model):
                                         img = qr.make_image()
                                         temp = BytesIO()
                                         img.save(temp, format="PNG")
-                                        qr_image = base64.b64encode(temp.getvalue())
+                                        qr_image = base64.b64encode(
+                                            temp.getvalue())
                                         rec.ei_qr_image = qr_image
 
                                     success = True
                                     break
                             if success:
                                 # self.env.user.notify_info(message=_("Validation in DIAN has been successful."))
-                                _logger.debug("Validation in DIAN has been successful.")
+                                _logger.debug(
+                                    "Validation in DIAN has been successful.")
                             else:
                                 # self.env.user.notify_warning(message=_("The document has not been validated."))
-                                _logger.debug("The document has not been validated.")
+                                _logger.debug(
+                                    "The document has not been validated.")
                         else:
                             # self.env.user.notify_warning(message=_("The document could not be consulted."))
-                            _logger.debug("The document could not be consulted.")
+                            _logger.debug(
+                                "The document could not be consulted.")
                     else:
                         # self.env.user.notify_warning(
                         #     message=_("A number is required to verify the status of the document."))
-                        _logger.debug("A number is required to verify the status of the document.")
+                        _logger.debug(
+                            "A number is required to verify the status of the document.")
                 else:
                     # self.env.user.notify_warning(message=_("This type of document does not need to be sent to DIAN."))
-                    _logger.debug("This type of document does not need to be sent to DIAN.")
+                    _logger.debug(
+                        "This type of document does not need to be sent to DIAN.")
             except Exception as e:
                 # self.env.user.notify_warning(message=_("Failed to process the request"))
                 _logger.debug("Failed to process the request: %s", e)
@@ -1462,7 +1600,8 @@ class AccountMove(models.Model):
                 with BytesIO(base64.b64decode(rec.ei_attached_document_base64_bytes)) as file:
                     search_ok = False
                     for line in file:
-                        search_string = '<cbc:ParentDocumentID>' + rec.number_formatted + '</cbc:ParentDocumentID>'
+                        search_string = '<cbc:ParentDocumentID>' + \
+                            rec.number_formatted + '</cbc:ParentDocumentID>'
                         if search_string in str(line):
                             search_ok = True
                             break
@@ -1485,6 +1624,7 @@ class AccountMove(models.Model):
             # example: msg_dict['date'] = '2021-07-20 01:15:20'
             # rec.event_date = msg_dict['date']
 
-            _logger.debug("Mail event. Invoice: %s, Event: %s" % (rec.number_formatted, rec.event))
+            _logger.debug("Mail event. Invoice: %s, Event: %s" %
+                          (rec.number_formatted, rec.event))
 
         return res
